@@ -58,21 +58,33 @@ const Form = ({
                                 label="School"
                                 value={eduItem.school || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(e, 'school', eduItem)
+                                    handleEducationOnChange(
+                                        e,
+                                        'school',
+                                        eduItem,
+                                    )
                                 }
                             />
                             <Input
                                 label="Location"
                                 value={eduItem.degree || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(e, 'location', eduItem)
+                                    handleEducationOnChange(
+                                        e,
+                                        'location',
+                                        eduItem,
+                                    )
                                 }
                             />
                             <Input
                                 label="Degree"
                                 value={eduItem.degree || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(e, 'degree', eduItem)
+                                    handleEducationOnChange(
+                                        e,
+                                        'degree',
+                                        eduItem,
+                                    )
                                 }
                             />
 
@@ -81,14 +93,22 @@ const Form = ({
                                     label="From"
                                     value={eduItem.from || ''}
                                     onChange={(e) =>
-                                        handleEducationOnChange(e, 'from', eduItem)
+                                        handleEducationOnChange(
+                                            e,
+                                            'from',
+                                            eduItem,
+                                        )
                                     }
                                 />
                                 <Input
                                     label="To"
                                     value={eduItem.to || ''}
                                     onChange={(e) =>
-                                        handleEducationOnChange(e, 'to', eduItem)
+                                        handleEducationOnChange(
+                                            e,
+                                            'to',
+                                            eduItem,
+                                        )
                                     }
                                 />
                             </div>
