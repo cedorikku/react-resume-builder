@@ -7,6 +7,7 @@ import { v4 as uuidv4 } from 'uuid';
 function App() {
     const [profile, setProfile] = useState({});
     const [education, setEducation] = useState([]);
+    const [projects, setProjects] = useState([]);
 
     const handleProfileOnChange = (e, name) => {
         setProfile({ ...profile, [name]: e.target.value });
@@ -48,17 +49,51 @@ function App() {
         console.log(education);
     };
 
+    const handleProjectsOnChange = (e, name, projectItem) => {
+        const index = projects.findIndex(
+            (proj) => proj.key === projectItem.key,
+        );
+
+        const newProjects = [...projects];
+
+        newProjects[index] = {
+            ...projectItem,
+            [name]: e.target.value,
+        };
+
+        setProjects(newProjects);
+    };
+
+    const handleAddProjectClick = () => {
+        setProjects([
+            ...projects,
+            {
+                key: uuidv4(),
+                name: '',
+                period: '',
+                responsibilities: [],
+            },
+        ]);
+    };
+
     return (
         <div className="">
             <Form
                 profile={profile}
                 education={education}
+                projects={projects}
                 handleProfileOnChange={handleProfileOnChange}
-                handleEducationOnChange={handleEducationOnChange}
                 handleAddEducationClick={handleAddEducationClick}
+                handleEducationOnChange={handleEducationOnChange}
+                handleProjectsOnChange={handleProjectsOnChange}
+                handleAddProjectClick={handleAddProjectClick}
             />
 
-            <Print profile={profile} education={education} />
+            <Print
+                profile={profile}
+                education={education}
+                projects={projects}
+            />
         </div>
     );
 }

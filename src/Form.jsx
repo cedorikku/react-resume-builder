@@ -5,9 +5,12 @@ import Button from './components/Button';
 const Form = ({
     profile,
     education,
+    projects,
     handleProfileOnChange,
     handleEducationOnChange,
     handleAddEducationClick,
+    handleProjectsOnChange,
+    handleAddProjectClick,
 }) => {
     return (
         <form method="">
@@ -111,7 +114,45 @@ const Form = ({
                 />
             </section>
 
-            <h2>Projects</h2>
+            <section>
+                <h2>Projects</h2>
+                {projects.map((projectItem) => {
+                    return (
+                        <div key={projectItem.key}>
+                            <Input
+                                label="Name"
+                                value={projectItem.name || ''}
+                                onChange={(e) =>
+                                    handleProjectsOnChange(
+                                        e,
+                                        'name',
+                                        projectItem,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Period"
+                                value={projectItem.period || ''}
+                                onChange={(e) =>
+                                    handleProjectsOnChange(
+                                        e,
+                                        'period',
+                                        projectItem,
+                                    )
+                                }
+                            />
+
+                            {/* <Button text="" handleClick={remove item} /> */}
+                        </div>
+                    );
+                })}
+
+                <Button
+                    text="Add Project"
+                    handleClick={handleAddProjectClick}
+                />
+            </section>
 
             <section>
                 <h2>Work & Experience</h2>

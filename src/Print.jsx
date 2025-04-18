@@ -2,7 +2,7 @@ import './styles/Print.css';
 
 import { PrintBodySection } from './components/layouts/PrintBodySection';
 
-const Print = ({ profile, education }) => {
+const Print = ({ profile, education, projects }) => {
     return (
         <div className="print">
             <div className="header">
@@ -24,7 +24,10 @@ const Print = ({ profile, education }) => {
                     <PrintBodySection name="Education">
                         {education.map((educationItem) => {
                             return (
-                                <div key={educationItem.key} className="edu-item">
+                                <div
+                                    key={educationItem.key}
+                                    className="edu-item"
+                                >
                                     <div className="row">
                                         <div>
                                             {educationItem.school ||
@@ -48,6 +51,25 @@ const Print = ({ profile, education }) => {
                                                 {educationItem.to || '[To]'}
                                             </span>
                                         </div>
+                                    </div>
+                                </div>
+                            );
+                        })}
+                    </PrintBodySection>
+                ) : (
+                    ''
+                )}
+
+                {projects.length != 0 ? (
+                    <PrintBodySection name="Projects">
+                        {projects.map((projectItem) => {
+                            return (
+                                <div key={projectItem.key}>
+                                    <div>
+                                        {projectItem.name || '[Project Name]'}
+                                    </div>
+                                    <div>
+                                        {projectItem.period || '[Month Year]'}
                                     </div>
                                 </div>
                             );
