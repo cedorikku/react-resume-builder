@@ -9,6 +9,7 @@ const Form = ({
     handleProfileOnChange,
     handleEducationOnChange,
     handleAddEducationClick,
+    handleRemoveEducationClick,
     handleProjectsOnChange,
     handleAddProjectClick,
 }) => {
@@ -47,6 +48,10 @@ const Form = ({
                 {education.map((educationItem) => {
                     return (
                         <div key={educationItem.key}>
+                            <Button
+                                text="Remove"
+                                handleClick={() => handleRemoveEducationClick(educationItem.key)}
+                            />
                             <Input
                                 label="School"
                                 value={educationItem.school || ''}

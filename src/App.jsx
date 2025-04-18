@@ -46,8 +46,11 @@ function App() {
                 to: '',
             },
         ]);
-        console.log(education);
     };
+
+    const handleRemoveEducationClick = (key) => {
+        setEducation((education.filter((eduItem) => eduItem.key !== key)));
+    }
 
     const handleProjectsOnChange = (e, name, projectItem) => {
         const index = projects.findIndex(
@@ -84,6 +87,7 @@ function App() {
                 projects={projects}
                 handleProfileOnChange={handleProfileOnChange}
                 handleAddEducationClick={handleAddEducationClick}
+                handleRemoveEducationClick={handleRemoveEducationClick}
                 handleEducationOnChange={handleEducationOnChange}
                 handleProjectsOnChange={handleProjectsOnChange}
                 handleAddProjectClick={handleAddProjectClick}
