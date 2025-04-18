@@ -49,8 +49,8 @@ function App() {
     };
 
     const handleRemoveEducationClick = (key) => {
-        setEducation((education.filter((eduItem) => eduItem.key !== key)));
-    }
+        setEducation(education.filter((eduItem) => eduItem.key !== key));
+    };
 
     const handleProjectsOnChange = (e, name, projectItem) => {
         const index = projects.findIndex(
@@ -79,6 +79,10 @@ function App() {
         ]);
     };
 
+    const handleRemoveProjectClick = (key) => {
+        setProjects(projects.filter((projItem) => projItem.key !== key));
+    };
+
     return (
         <div className="">
             <Form
@@ -91,6 +95,7 @@ function App() {
                 handleEducationOnChange={handleEducationOnChange}
                 handleProjectsOnChange={handleProjectsOnChange}
                 handleAddProjectClick={handleAddProjectClick}
+                handleRemoveProjectClick={handleRemoveProjectClick}
             />
 
             <Print

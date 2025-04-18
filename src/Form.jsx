@@ -12,6 +12,7 @@ const Form = ({
     handleRemoveEducationClick,
     handleProjectsOnChange,
     handleAddProjectClick,
+    handleRemoveProjectClick,
 }) => {
     return (
         <form method="">
@@ -50,7 +51,11 @@ const Form = ({
                         <div key={educationItem.key}>
                             <Button
                                 text="Remove"
-                                handleClick={() => handleRemoveEducationClick(educationItem.key)}
+                                handleClick={() =>
+                                    handleRemoveEducationClick(
+                                        educationItem.key,
+                                    )
+                                }
                             />
                             <Input
                                 label="School"
@@ -124,6 +129,12 @@ const Form = ({
                 {projects.map((projectItem) => {
                     return (
                         <div key={projectItem.key}>
+                            <Button
+                                text="Remove"
+                                handleClick={() =>
+                                    handleRemoveProjectClick(projectItem.key)
+                                }
+                            />
                             <Input
                                 label="Name"
                                 value={projectItem.name || ''}
