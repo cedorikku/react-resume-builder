@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import Form from './Form';
 import Print from './Print';
+import { v4 as uuidv4 } from 'uuid';
 
 function App() {
     const [profile, setProfile] = useState({});
@@ -34,7 +35,7 @@ function App() {
         setEducation([
             ...education,
             {
-                key: crypto.randomUUID(),
+                key: uuidv4(),
                 location: '',
                 school: '',
                 degree: '',
