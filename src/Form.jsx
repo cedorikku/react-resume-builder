@@ -2,18 +2,18 @@ import './styles/Form.css';
 import Input from './components/Input';
 import Button from './components/Button';
 
-const Form = ({
-    profile,
-    education,
-    projects,
-    handleProfileOnChange,
-    handleEducationOnChange,
-    handleAddEducationClick,
-    handleRemoveEducationClick,
-    handleProjectsOnChange,
-    handleAddProjectClick,
-    handleRemoveProjectClick,
-}) => {
+const Form = ({ props }) => {
+    const {
+        states: { profile, education, projects },
+        handleProfileOnChange,
+        handleAddEducationClick,
+        handleRemoveEducationClick,
+        handleEducationOnChange,
+        handleProjectsOnChange,
+        handleAddProjectClick,
+        handleRemoveProjectClick,
+    } = props;
+
     return (
         <form method="">
             <section>

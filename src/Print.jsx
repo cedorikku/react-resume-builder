@@ -2,7 +2,9 @@ import './styles/Print.css';
 
 import { PrintBodySection } from './components/layouts/PrintBodySection';
 
-const Print = ({ profile, education, projects }) => {
+const Print = ({ props }) => {
+    const { profile, education, projects } = props;
+
     return (
         <div className="print">
             <div className="header">
@@ -13,7 +15,9 @@ const Print = ({ profile, education, projects }) => {
                     {profile.address || '[City, State ZipCode]'}
                 </div>
                 <div className="flex justify-center gap-2">
-                    <span>{profile.email || '[youraddress@email.com]'}</span>
+                    <span>
+                        {profile.email || '[youraddress@email.com]'}
+                    </span>
                     <span>|</span>
                     <span>{profile.phone || '[xxxxxxxxxxx]'}</span>
                 </div>

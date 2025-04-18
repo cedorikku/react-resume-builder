@@ -83,26 +83,26 @@ function App() {
         setProjects(projects.filter((projItem) => projItem.key !== key));
     };
 
+    const props = {
+        states: {
+            profile,
+            education,
+            projects,
+        },
+        handleProfileOnChange,
+        handleAddEducationClick,
+        handleRemoveEducationClick,
+        handleEducationOnChange,
+        handleProjectsOnChange,
+        handleAddProjectClick,
+        handleRemoveProjectClick,
+    };
+
     return (
         <div className="">
-            <Form
-                profile={profile}
-                education={education}
-                projects={projects}
-                handleProfileOnChange={handleProfileOnChange}
-                handleAddEducationClick={handleAddEducationClick}
-                handleRemoveEducationClick={handleRemoveEducationClick}
-                handleEducationOnChange={handleEducationOnChange}
-                handleProjectsOnChange={handleProjectsOnChange}
-                handleAddProjectClick={handleAddProjectClick}
-                handleRemoveProjectClick={handleRemoveProjectClick}
-            />
+            <Form props={props} />
 
-            <Print
-                profile={profile}
-                education={education}
-                projects={projects}
-            />
+            <Print props={props.states} />
         </div>
     );
 }
