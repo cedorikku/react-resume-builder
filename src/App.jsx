@@ -18,7 +18,9 @@ function App() {
     */
     const handleEducationOnChange = (e, name, educationItem) => {
         // find index of the education item with received key from the caller
-        const index = education.findIndex((edu) => edu.key === educationItem.key);
+        const index = education.findIndex(
+            (edu) => edu.key === educationItem.key,
+        );
 
         // create a new array, then replace the education item at the index
         const newEducation = [...education];

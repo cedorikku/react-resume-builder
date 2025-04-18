@@ -37,13 +37,16 @@ const Print = ({ profile, education }) => {
                                     </div>
                                     <div className="row">
                                         <div>
-                                            {educationItem.degree || '[Your Degree]'}
+                                            {educationItem.degree ||
+                                                '[Your Degree]'}
                                         </div>
                                         <div>
                                             <span>
                                                 {educationItem.from || '[From]'}
                                             </span>
-                                            <span>{educationItem.to || '[To]'}</span>
+                                            <span>
+                                                {educationItem.to || '[To]'}
+                                            </span>
                                         </div>
                                     </div>
                                 </div>
