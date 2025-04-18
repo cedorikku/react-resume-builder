@@ -22,18 +22,28 @@ const Print = ({ profile, education }) => {
             <div className="body">
                 {education.length != 0 ? (
                     <PrintBodySection name="Education">
-                        {education.map((eduItem, key) => {
+                        {education.map((educationItem) => {
                             return (
-                                <div key={key} className="edu-item">
-                                    <div className="top">
-                                        <div>{eduItem.school}</div>
-                                        <div>{eduItem.location}</div>
-                                    </div>
-                                    <div className="bottom">
-                                        <div>{eduItem.degree}</div>
+                                <div key={educationItem.key} className="edu-item">
+                                    <div className="row">
                                         <div>
-                                            <span>{eduItem.from}</span>
-                                            <span>{eduItem.to}</span>
+                                            {educationItem.school ||
+                                                '[Your School Name]'}
+                                        </div>
+                                        <div>
+                                            {educationItem.location ||
+                                                '[City, State]'}
+                                        </div>
+                                    </div>
+                                    <div className="row">
+                                        <div>
+                                            {educationItem.degree || '[Your Degree]'}
+                                        </div>
+                                        <div>
+                                            <span>
+                                                {educationItem.from || '[From]'}
+                                            </span>
+                                            <span>{educationItem.to || '[To]'}</span>
                                         </div>
                                     </div>
                                 </div>

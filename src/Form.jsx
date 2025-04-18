@@ -41,39 +41,39 @@ const Form = ({
 
             <section>
                 <h2>Education</h2>
-                {education.map((eduItem) => {
+                {education.map((educationItem) => {
                     return (
-                        <div key={eduItem.key}>
+                        <div key={educationItem.key}>
                             <Input
                                 label="School"
-                                value={eduItem.school || ''}
+                                value={educationItem.school || ''}
                                 onChange={(e) =>
                                     handleEducationOnChange(
                                         e,
                                         'school',
-                                        eduItem,
+                                        educationItem,
                                     )
                                 }
                             />
                             <Input
                                 label="Location"
-                                value={eduItem.degree || ''}
+                                value={educationItem.degree || ''}
                                 onChange={(e) =>
                                     handleEducationOnChange(
                                         e,
                                         'location',
-                                        eduItem,
+                                        educationItem,
                                     )
                                 }
                             />
                             <Input
                                 label="Degree"
-                                value={eduItem.degree || ''}
+                                value={educationItem.degree || ''}
                                 onChange={(e) =>
                                     handleEducationOnChange(
                                         e,
                                         'degree',
-                                        eduItem,
+                                        educationItem,
                                     )
                                 }
                             />
@@ -81,23 +81,23 @@ const Form = ({
                             <div className="year-range">
                                 <Input
                                     label="From"
-                                    value={eduItem.from || ''}
+                                    value={educationItem.from || ''}
                                     onChange={(e) =>
                                         handleEducationOnChange(
                                             e,
                                             'from',
-                                            eduItem,
+                                            educationItem,
                                         )
                                     }
                                 />
                                 <Input
                                     label="To"
-                                    value={eduItem.to || ''}
+                                    value={educationItem.to || ''}
                                     onChange={(e) =>
                                         handleEducationOnChange(
                                             e,
                                             'to',
-                                            eduItem,
+                                            educationItem,
                                         )
                                     }
                                 />

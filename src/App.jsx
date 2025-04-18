@@ -15,15 +15,15 @@ function App() {
      An array was used here because I needed to retain where the position
      of the items are.
     */
-    const handleEducationOnChange = (e, name, eduItem) => {
+    const handleEducationOnChange = (e, name, educationItem) => {
         // find index of the education item with received key from the caller
-        const index = education.findIndex((edu) => edu.key === eduItem.key);
+        const index = education.findIndex((edu) => edu.key === educationItem.key);
 
         // create a new array, then replace the education item at the index
         const newEducation = [...education];
 
         newEducation[index] = {
-            ...eduItem,
+            ...educationItem,
             [name]: e.target.value,
         };
 
@@ -35,11 +35,11 @@ function App() {
             ...education,
             {
                 key: crypto.randomUUID(),
-                location: 'Location, ST',
-                school: 'Sample University',
-                degree: 'High School Graduate',
-                from: 'XXXX',
-                to: 'XXXX',
+                location: '',
+                school: '',
+                degree: '',
+                from: '',
+                to: '',
             },
         ]);
         console.log(education);
