@@ -7,18 +7,16 @@ const Print = ({ profile, education }) => {
         <div className="print">
             <div className="header">
                 <h1 className="text-center text-3xl font-black uppercase">
-                    {profile.name || 'FULL NAME'}
+                    {profile.name || '[FIRST LAST]'}
                 </h1>
-                <h2 className="text-center text-xl font-bold">
-                    {profile.title || 'JOB TITLE'}
-                </h2>
-            </div>
-            <div className="contact flex justify-center gap-2">
-                <span>{profile.email || 'youraddress@email.com'}</span>
-                <span>|</span>
-                <span>{profile.address || 'Cty, State ZipCode'}</span>
-                <span>|</span>
-                <span>{profile.phone || 'XXXXXXXXXXX'}</span>
+                <div className="text-center">
+                    {profile.address || '[City, State ZipCode]'}
+                </div>
+                <div className="flex justify-center gap-2">
+                    <span>{profile.email || '[youraddress@email.com]'}</span>
+                    <span>|</span>
+                    <span>{profile.phone || '[xxxxxxxxxxx]'}</span>
+                </div>
             </div>
 
             <div className="body">
@@ -46,7 +44,7 @@ const Print = ({ profile, education }) => {
                     ''
                 )}
 
-                {/* Put more print sections down here */}
+                {/* Put more print body sections (component) down here */}
             </div>
         </div>
     );

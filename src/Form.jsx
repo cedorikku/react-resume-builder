@@ -12,7 +12,7 @@ const Form = ({
     return (
         <form method="">
             <section>
-                <h2>Header</h2>
+                <h2>Profile</h2>
                 <Input
                     type="text"
                     label="Name"
@@ -21,25 +21,15 @@ const Form = ({
                 />
                 <Input
                     type="text"
-                    label="Title"
-                    value={profile.title || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'title')}
+                    label="Address"
+                    value={profile.address || ''}
+                    onChange={(e) => handleProfileOnChange(e, 'address')}
                 />
-            </section>
-
-            <section>
-                <h2>Contact</h2>
                 <Input
                     type="email"
                     label="Email"
                     value={profile.email || ''}
                     onChange={(e) => handleProfileOnChange(e, 'email')}
-                />
-                <Input
-                    type="text"
-                    label="Address"
-                    value={profile.address || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'address')}
                 />
                 <Input
                     type="tel"
@@ -120,6 +110,7 @@ const Form = ({
                     handleClick={handleAddEducationClick}
                 />
             </section>
+
             <h2>Projects</h2>
 
             <section>
