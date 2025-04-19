@@ -8,11 +8,14 @@ function App() {
     const [profile, setProfile] = useState({});
     const [education, setEducation] = useState([]);
     const [projects, setProjects] = useState([]);
+    const [projectResponsibilities, setProjectResponsibilities] = useState([]);
 
+    // PROFILE
     const handleProfileOnChange = (e, name) => {
         setProfile({ ...profile, [name]: e.target.value });
     };
 
+    // EDUCATION
     /*
      An array was used here because I needed to retain where the position
      of the items are.
@@ -52,6 +55,7 @@ function App() {
         setEducation(education.filter((eduItem) => eduItem.key !== key));
     };
 
+    // PROJECTS
     const handleProjectsOnChange = (e, name, projectItem) => {
         const index = projects.findIndex(
             (proj) => proj.key === projectItem.key,
@@ -83,11 +87,75 @@ function App() {
         setProjects(projects.filter((projItem) => projItem.key !== key));
     };
 
+    const handleAddProjectResponsibilityClick = (projectItemKey) => {
+        const itemKey = uuidv4();
+
+        const index = projects.findIndex((p) => p.key === projectItemKey);
+
+        const newProjects = [...projects];
+
+        newProjects[index] = {
+            key: projectItemKey,
+            name: projects[index].name,
+            period: projects[index].period,
+            responsibilities: [...projects[index].responsibilities, itemKey],
+        };
+
+        setProjects(newProjects);
+
+        setProjectResponsibilities([
+            ...projectResponsibilities,
+            {
+                key: itemKey,
+                description: '',
+            },
+        ]);
+    };
+
+    const handleProjectResponsibilitiesOnChange = (
+        e,
+        name,
+        responsibilityKey,
+    ) => {
+        const index = projectResponsibilities.findIndex(
+            (pr) => pr.key === responsibilityKey,
+        );
+
+        const newProjectResponsibilities = [...projectResponsibilities];
+
+        newProjectResponsibilities[index] = {
+            ...projectResponsibilities[index],
+            [name]: e.target.value,
+        };
+
+        setProjectResponsibilities(newProjectResponsibilities);
+    };
+
+    const handleRemoveProjectResponsibilityClick = (projectKey, itemKey) => {
+        const index = projects.findIndex((p) => p.key === projectKey);
+
+        const newProjects = [...projects];
+
+        newProjects[index] = {
+            ...projects[index],
+            responsibilities: projects[index].responsibilities.filter(
+                (item) => item !== itemKey,
+            ),
+        };
+
+        setProjects(newProjects);
+
+        setProjectResponsibilities(
+            projectResponsibilities.filter((item) => item.key !== itemKey),
+        );
+    };
+
     const props = {
         states: {
             profile,
             education,
             projects,
+            projectResponsibilities,
         },
         handleProfileOnChange,
         handleAddEducationClick,
@@ -96,6 +164,9 @@ function App() {
         handleProjectsOnChange,
         handleAddProjectClick,
         handleRemoveProjectClick,
+        handleAddProjectResponsibilityClick,
+        handleRemoveProjectResponsibilityClick,
+        handleProjectResponsibilitiesOnChange,
     };
 
     return (

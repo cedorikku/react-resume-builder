@@ -3,7 +3,7 @@ import './styles/Print.css';
 import { PrintBodySection } from './components/layouts/PrintBodySection';
 
 const Print = ({ props }) => {
-    const { profile, education, projects } = props;
+    const { profile, education, projects, projectResponsibilities } = props;
 
     return (
         <div className="print">
@@ -15,9 +15,7 @@ const Print = ({ props }) => {
                     {profile.address || '[City, State ZipCode]'}
                 </div>
                 <div className="flex justify-center gap-2">
-                    <span>
-                        {profile.email || '[youraddress@email.com]'}
-                    </span>
+                    <span>{profile.email || '[youraddress@email.com]'}</span>
                     <span>|</span>
                     <span>{profile.phone || '[xxxxxxxxxxx]'}</span>
                 </div>
@@ -75,6 +73,25 @@ const Print = ({ props }) => {
                                     <div>
                                         {projectItem.period || '[Month Year]'}
                                     </div>
+                                    <ul>
+                                        {projectResponsibilities.length != 0
+                                            ? projectItem.responsibilities.map(
+                                                  (key) => {
+                                                      const responsibility =
+                                                          projectResponsibilities.find(
+                                                              (r) =>
+                                                                  r.key === key,
+                                                          );
+                                                      return (
+                                                          <li key={key}>
+                                                              {responsibility.description ||
+                                                                  '[A Description]'}
+                                                          </li>
+                                                      );
+                                                  },
+                                              )
+                                            : ''}
+                                    </ul>
                                 </div>
                             );
                         })}

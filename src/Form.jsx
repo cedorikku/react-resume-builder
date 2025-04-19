@@ -1,10 +1,11 @@
 import './styles/Form.css';
+import { v4 as uuidv4 } from 'uuid';
 import Input from './components/Input';
 import Button from './components/Button';
 
 const Form = ({ props }) => {
     const {
-        states: { profile, education, projects },
+        states: { profile, education, projects, projectResponsibilities },
         handleProfileOnChange,
         handleAddEducationClick,
         handleRemoveEducationClick,
@@ -12,6 +13,9 @@ const Form = ({ props }) => {
         handleProjectsOnChange,
         handleAddProjectClick,
         handleRemoveProjectClick,
+        handleProjectResponsibilitiesOnChange,
+        handleAddProjectResponsibilityClick,
+        handleRemoveProjectResponsibilityClick,
     } = props;
 
     return (
@@ -159,7 +163,43 @@ const Form = ({ props }) => {
                                 }
                             />
 
-                            {/* <Button text="" handleClick={remove item} /> */}
+                            <h3>Responsibilities</h3>
+                            <ul>
+                                {projectItem.responsibilities.map((responsibilityKey, index) => {
+                                    return (
+                                        <li key={responsibilityKey}>
+                                            <Input
+                                                label={++index}
+                                                onChange={(e) =>
+                                                    handleProjectResponsibilitiesOnChange(
+                                                        e,
+                                                        'description',
+                                                        responsibilityKey,
+                                                    )
+                                                }
+                                            />
+                                            <Button
+                                                text="-"
+                                                handleClick={() =>
+                                                    handleRemoveProjectResponsibilityClick(
+                                                        projectItem.key,
+                                                        responsibilityKey,
+                                                    )
+                                                }
+                                            />
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+
+                            <Button
+                                text="+"
+                                handleClick={() =>
+                                    handleAddProjectResponsibilityClick(
+                                        projectItem.key,
+                                    )
+                                }
+                            />
                         </div>
                     );
                 })}
