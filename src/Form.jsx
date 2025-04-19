@@ -53,14 +53,6 @@ const Form = ({ props }) => {
                 {education.map((educationItem) => {
                     return (
                         <div key={educationItem.key}>
-                            <Button
-                                text="Remove"
-                                handleClick={() =>
-                                    handleRemoveEducationClick(
-                                        educationItem.key,
-                                    )
-                                }
-                            />
                             <Input
                                 label="School"
                                 value={educationItem.school || ''}
@@ -119,6 +111,15 @@ const Form = ({ props }) => {
                                     }
                                 />
                             </div>
+
+                            <Button
+                                text="Remove"
+                                handleClick={() =>
+                                    handleRemoveEducationClick(
+                                        educationItem.key,
+                                    )
+                                }
+                            />
                         </div>
                     );
                 })}
@@ -133,12 +134,6 @@ const Form = ({ props }) => {
                 {projects.map((projectItem) => {
                     return (
                         <div key={projectItem.key}>
-                            <Button
-                                text="Remove"
-                                handleClick={() =>
-                                    handleRemoveProjectClick(projectItem.key)
-                                }
-                            />
                             <Input
                                 label="Name"
                                 value={projectItem.name || ''}
@@ -198,6 +193,13 @@ const Form = ({ props }) => {
                                     handleAddProjectResponsibilityClick(
                                         projectItem.key,
                                     )
+                                }
+                            />
+
+                            <Button
+                                text="Remove"
+                                handleClick={() =>
+                                    handleRemoveProjectClick(projectItem.key)
                                 }
                             />
                         </div>
