@@ -30,7 +30,7 @@ const Print = ({ props }) => {
                                     key={educationItem.key}
                                     className="edu-item"
                                 >
-                                    <div className="row">
+                                    <div className="flex justify-between font-bold">
                                         <div>
                                             {educationItem.school ||
                                                 '[Your School Name]'}
@@ -40,15 +40,16 @@ const Print = ({ props }) => {
                                                 '[City, State]'}
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    <div className="flex justify-between">
                                         <div>
                                             {educationItem.degree ||
                                                 '[Your Degree]'}
                                         </div>
-                                        <div>
+                                        <div className="flex gap-2 italic">
                                             <span>
                                                 {educationItem.from || '[From]'}
                                             </span>
+                                            <span>-</span>
                                             <span>
                                                 {educationItem.to || '[To]'}
                                             </span>
