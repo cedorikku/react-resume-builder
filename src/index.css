@@ -40,16 +40,13 @@ h2 {
     font-weight: 600;
 }
 
-.form,
-.print {
-    box-shadow: 0 8px 32px rgb(0, 0, 0, 0.3);
-}
-
 @media only print {
     /* US letter page size */
+    form {
+        display: none;
+    }
+
     .print {
         font-size: 12px;
-        width: 612px;
-        height: 792px;
     }
 }
