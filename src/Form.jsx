@@ -1,5 +1,4 @@
 import './styles/Form.css';
-import { v4 as uuidv4 } from 'uuid';
 import Input from './components/Input';
 import Button from './components/Button';
 
@@ -19,7 +18,10 @@ const Form = ({ props }) => {
     } = props;
 
     return (
-        <form method="">
+        <form
+            method=""
+            className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-white"
+        >
             <section>
                 <h2>Profile</h2>
                 <Input
@@ -159,34 +161,6 @@ const Form = ({ props }) => {
                             />
 
                             <h3>Responsibilities</h3>
-                            <ul>
-                                {projectItem.responsibilities.map((responsibilityKey, index) => {
-                                    return (
-                                        <li key={responsibilityKey}>
-                                            <Input
-                                                label={++index}
-                                                onChange={(e) =>
-                                                    handleProjectResponsibilitiesOnChange(
-                                                        e,
-                                                        'description',
-                                                        responsibilityKey,
-                                                    )
-                                                }
-                                            />
-                                            <Button
-                                                text="-"
-                                                handleClick={() =>
-                                                    handleRemoveProjectResponsibilityClick(
-                                                        projectItem.key,
-                                                        responsibilityKey,
-                                                    )
-                                                }
-                                            />
-                                        </li>
-                                    );
-                                })}
-                            </ul>
-
                             <Button
                                 text="+"
                                 handleClick={() =>
@@ -195,6 +169,35 @@ const Form = ({ props }) => {
                                     )
                                 }
                             />
+                            <ul>
+                                {projectItem.responsibilities.map(
+                                    (responsibilityKey, index) => {
+                                        return (
+                                            <li key={responsibilityKey}>
+                                                <Input
+                                                    label={++index}
+                                                    onChange={(e) =>
+                                                        handleProjectResponsibilitiesOnChange(
+                                                            e,
+                                                            'description',
+                                                            responsibilityKey,
+                                                        )
+                                                    }
+                                                />
+                                                <Button
+                                                    text="-"
+                                                    handleClick={() =>
+                                                        handleRemoveProjectResponsibilityClick(
+                                                            projectItem.key,
+                                                            responsibilityKey,
+                                                        )
+                                                    }
+                                                />
+                                            </li>
+                                        );
+                                    },
+                                )}
+                            </ul>
 
                             <Button
                                 text="Remove"

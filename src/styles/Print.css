@@ -1,0 +1,4 @@
+/* bulleted */
+.print li {
+    list-style: inside;
+}

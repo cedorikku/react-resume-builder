@@ -1,15 +1,5 @@
-form {
-    padding: 0.5rem;
-}
-
-form h2 {
-    font-weight: 700;
-    font-size: 1.25rem;
-    margin: 0.5rem 0;
-}
-
 .year-range {
     display: flex;
-    flex-basis: 50%;
+    flex-grow: 1;
     gap: 0.5rem;
 }
