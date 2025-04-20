@@ -67,11 +67,15 @@ const Print = ({ props }) => {
                         {projects.map((projectItem) => {
                             return (
                                 <div key={projectItem.key}>
-                                    <div>
-                                        {projectItem.name || '[Project Name]'}
-                                    </div>
-                                    <div>
-                                        {projectItem.period || '[Month Year]'}
+                                    <div className="flex justify-between font-bold">
+                                        <span>
+                                            {projectItem.name ||
+                                                '[Project Name]'}
+                                        </span>
+                                        <span>
+                                            {projectItem.period ||
+                                                '[Month Year]'}
+                                        </span>
                                     </div>
                                     <ul>
                                         {projectResponsibilities.length != 0
