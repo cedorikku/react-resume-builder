@@ -1,6 +1,6 @@
 import './styles/Print.css';
 
-import { PrintBodySection } from './components/layouts/PrintBodySection';
+import { PrintSection } from './components/layouts/PrintSection';
 
 const Print = ({ props }) => {
     const { profile, education, projects, projectResponsibilities } = props;
@@ -23,7 +23,7 @@ const Print = ({ props }) => {
 
             <div className="body">
                 {education.length != 0 ? (
-                    <PrintBodySection name="Education">
+                    <PrintSection name="Education">
                         {education.map((educationItem) => {
                             return (
                                 <div
@@ -58,13 +58,13 @@ const Print = ({ props }) => {
                                 </div>
                             );
                         })}
-                    </PrintBodySection>
+                    </PrintSection>
                 ) : (
                     ''
                 )}
 
                 {projects.length != 0 ? (
-                    <PrintBodySection name="Projects">
+                    <PrintSection name="Projects">
                         {projects.map((projectItem) => {
                             return (
                                 <div key={projectItem.key}>
@@ -100,7 +100,7 @@ const Print = ({ props }) => {
                                 </div>
                             );
                         })}
-                    </PrintBodySection>
+                    </PrintSection>
                 ) : (
                     ''
                 )}
