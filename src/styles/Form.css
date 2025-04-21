@@ -1,5 +1,5 @@
 .year-range {
     display: flex;
     flex-grow: 1;
-    gap: 0.5rem;
+    gap: 1rem;
 }
