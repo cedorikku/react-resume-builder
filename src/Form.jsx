@@ -1,6 +1,7 @@
 import './styles/Form.css';
 import Input from './components/Input';
 import Button from './components/Button';
+import { FormSection } from './components/layouts/FormSection';
 
 const Form = ({ props }) => {
     const {
@@ -22,8 +23,7 @@ const Form = ({ props }) => {
             method=""
             className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-white"
         >
-            <section>
-                <h2>Profile</h2>
+            <FormSection name="Profile">
                 <Input
                     type="text"
                     label="Name"
@@ -48,10 +48,9 @@ const Form = ({ props }) => {
                     value={profile.phone || ''}
                     onChange={(e) => handleProfileOnChange(e, 'phone')}
                 />
-            </section>
+            </FormSection>
 
-            <section>
-                <h2>Education</h2>
+            <FormSection name="Education">
                 {education.map((educationItem) => {
                     return (
                         <div key={educationItem.key}>
@@ -129,10 +128,9 @@ const Form = ({ props }) => {
                     text="Add Education"
                     handleClick={handleAddEducationClick}
                 />
-            </section>
+            </FormSection>
 
-            <section>
-                <h2>Projects</h2>
+            <FormSection name="Projects">
                 {projects.map((projectItem) => {
                     return (
                         <div key={projectItem.key}>
@@ -177,7 +175,10 @@ const Form = ({ props }) => {
                                 {projectItem.responsibilities.map(
                                     (responsibilityKey, index) => {
                                         return (
-                                            <li key={responsibilityKey} className="flex gap-4">
+                                            <li
+                                                key={responsibilityKey}
+                                                className="flex gap-4"
+                                            >
                                                 <Input
                                                     placeholder={++index}
                                                     onChange={(e) =>
@@ -217,17 +218,11 @@ const Form = ({ props }) => {
                     text="Add Project"
                     handleClick={handleAddProjectClick}
                 />
-            </section>
+            </FormSection>
 
-            <section>
-                <h2>Work & Experience</h2>
-            </section>
+            <FormSection name="Experience"></FormSection>
 
-            <section></section>
-
-            <section>
-                <h2>Skills, Activities & Interests</h2>
-            </section>
+            <FormSection name="Skills"></FormSection>
         </form>
     );
 };
