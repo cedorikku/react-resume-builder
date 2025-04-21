@@ -160,22 +160,26 @@ const Form = ({ props }) => {
                                 }
                             />
 
-                            <h3>Responsibilities</h3>
-                            <Button
-                                text="+"
-                                handleClick={() =>
-                                    handleAddProjectResponsibilityClick(
-                                        projectItem.key,
-                                    )
-                                }
-                            />
+                            <div className="flex items-center gap-8">
+                                <label className="mb-4 text-sm font-medium">
+                                    Responsibilities
+                                </label>
+                                <Button
+                                    text="+"
+                                    handleClick={() =>
+                                        handleAddProjectResponsibilityClick(
+                                            projectItem.key,
+                                        )
+                                    }
+                                />
+                            </div>
                             <ul>
                                 {projectItem.responsibilities.map(
                                     (responsibilityKey, index) => {
                                         return (
-                                            <li key={responsibilityKey}>
+                                            <li key={responsibilityKey} className="flex gap-4">
                                                 <Input
-                                                    label={++index}
+                                                    placeholder={++index}
                                                     onChange={(e) =>
                                                         handleProjectResponsibilitiesOnChange(
                                                             e,
