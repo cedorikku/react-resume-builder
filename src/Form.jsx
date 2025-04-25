@@ -20,8 +20,7 @@ const Form = ({ props }) => {
 
     return (
         <form
-            method=""
-            className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-white"
+            className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-sm text-white"
         >
             <FormSection name="Profile">
                 <Input
