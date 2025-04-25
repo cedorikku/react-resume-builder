@@ -6,7 +6,7 @@ const Print = ({ props }) => {
     const { profile, education, projects, projectResponsibilities } = props;
 
     return (
-        <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white p-8 font-serif text-black">
+        <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
             <div className="header">
                 <h1 className="text-center text-3xl font-black uppercase">
                     {profile.name || '[FIRST LAST]'}
