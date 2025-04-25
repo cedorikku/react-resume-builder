@@ -170,7 +170,7 @@ const Form = ({ props }) => {
                                     }
                                 />
                             </div>
-                            <ul>
+                            <ul className="flex flex-col gap-4 justify-center">
                                 {projectItem.responsibilities.map(
                                     (responsibilityKey, index) => {
                                         return (
@@ -188,15 +188,17 @@ const Form = ({ props }) => {
                                                         )
                                                     }
                                                 />
-                                                <Button
-                                                    text="-"
-                                                    handleClick={() =>
-                                                        handleRemoveProjectResponsibilityClick(
-                                                            projectItem.key,
-                                                            responsibilityKey,
-                                                        )
-                                                    }
-                                                />
+                                                <div className="flex basis-20">
+                                                    <Button
+                                                        text="-"
+                                                        handleClick={() =>
+                                                            handleRemoveProjectResponsibilityClick(
+                                                                projectItem.key,
+                                                                responsibilityKey,
+                                                            )
+                                                        }
+                                                    />
+                                                </div>
                                             </li>
                                         );
                                     },
