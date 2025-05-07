@@ -245,7 +245,7 @@ function App() {
         const newResponsibilities = [...experienceResponsibilities];
 
         newResponsibilities[index] = {
-            ...projectResponsibilities[index],
+            ...experienceResponsibilities[index],
             [name]: e.target.value,
         };
 
