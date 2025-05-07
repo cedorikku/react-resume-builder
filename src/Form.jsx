@@ -19,9 +19,7 @@ const Form = ({ props }) => {
     } = props;
 
     return (
-        <form
-            className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-sm text-white"
-        >
+        <form className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-sm text-white">
             <FormSection name="Profile">
                 <Input
                     type="text"
@@ -158,7 +156,7 @@ const Form = ({ props }) => {
                             />
 
                             <div className="flex items-center gap-8">
-                                <label className="mb-4 text-sm font-medium">
+                                <label className="text-sm font-medium">
                                     Responsibilities
                                 </label>
                                 <Button
@@ -170,7 +168,7 @@ const Form = ({ props }) => {
                                     }
                                 />
                             </div>
-                            <ul className="flex flex-col gap-4 justify-center">
+                            <ul className="flex flex-col justify-center gap-4">
                                 {projectItem.responsibilities.map(
                                     (responsibilityKey, index) => {
                                         return (
