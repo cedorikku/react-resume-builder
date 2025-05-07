@@ -40,18 +40,20 @@ const Form = ({ props }) => {
                         value={profile.address || ''}
                         onChange={(e) => handleProfileOnChange(e, 'address')}
                     />
-                    <Input
-                        type="email"
-                        label="Email"
-                        value={profile.email || ''}
-                        onChange={(e) => handleProfileOnChange(e, 'email')}
-                    />
-                    <Input
-                        type="tel"
-                        label="Phone"
-                        value={profile.phone || ''}
-                        onChange={(e) => handleProfileOnChange(e, 'phone')}
-                    />
+                    <div className="two-col">
+                        <Input
+                            type="email"
+                            label="Email"
+                            value={profile.email || ''}
+                            onChange={(e) => handleProfileOnChange(e, 'email')}
+                        />
+                        <Input
+                            type="tel"
+                            label="Phone"
+                            value={profile.phone || ''}
+                            onChange={(e) => handleProfileOnChange(e, 'phone')}
+                        />
+                    </div>
                 </div>
             </FormSection>
 
@@ -93,7 +95,7 @@ const Form = ({ props }) => {
                                 }
                             />
 
-                            <div className="year-range">
+                            <div className="two-col">
                                 <Input
                                     label="From"
                                     value={educationItem.from || ''}
@@ -258,31 +260,30 @@ const Form = ({ props }) => {
                                     )
                                 }
                             />
-
-                            <Input
-                                label="Period"
-                                value={expItem.period || ''}
-                                onChange={(e) =>
-                                    handleExperiencesOnChange(
-                                        e,
-                                        'period',
-                                        expItem,
-                                    )
-                                }
-                            />
-
-                            <Input
-                                label="Place"
-                                value={expItem.place || ''}
-                                onChange={(e) =>
-                                    handleExperiencesOnChange(
-                                        e,
-                                        'place',
-                                        expItem,
-                                    )
-                                }
-                            />
-
+                            <div className="two-col">
+                                <Input
+                                    label="Period"
+                                    value={expItem.period || ''}
+                                    onChange={(e) =>
+                                        handleExperiencesOnChange(
+                                            e,
+                                            'period',
+                                            expItem,
+                                        )
+                                    }
+                                />
+                                <Input
+                                    label="Place"
+                                    value={expItem.place || ''}
+                                    onChange={(e) =>
+                                        handleExperiencesOnChange(
+                                            e,
+                                            'place',
+                                            expItem,
+                                        )
+                                    }
+                                />
+                            </div>
                             <div className="flex items-center gap-8">
                                 <label className="text-sm font-medium">
                                     Responsibilities
@@ -334,7 +335,6 @@ const Form = ({ props }) => {
                             ) : (
                                 ''
                             )}
-
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>

@@ -1,12 +1,13 @@
-.year-range {
-    display: flex;
-    flex-grow: 1;
-    gap: 1rem;
-}
-
 .input-group {
     display: flex;
     flex-direction: column;
     gap: 1rem;
     margin: 1rem 0;
+}
+
+.two-col {
+    display: flex;
+    flex-grow: 1;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
 }

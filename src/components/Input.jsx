@@ -3,10 +3,10 @@ import { v4 as uuidv4 } from 'uuid';
 const Input = ({ type = 'text', label, placeholder, onChange }) => {
     const id = uuidv4();
     return (
-        <div className="flex w-[100%] items-center">
+        <div className="flex w-[100%] flex-col">
             {label ? (
                 <label
-                    className="min-w-[15ch] text-sm font-medium"
+                    className="mb-2 min-w-[15ch] text-sm font-medium"
                     htmlFor={id}
                 >
                     {label || ''}
