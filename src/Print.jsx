@@ -37,8 +37,8 @@ const Print = ({ props }) => {
                                     key={educationItem.key}
                                     className="edu-item"
                                 >
-                                    <div className="flex justify-between font-bold">
-                                        <div>
+                                    <div className="flex justify-between">
+                                        <div className="font-bold">
                                             {educationItem.school ||
                                                 '[Your School Name]'}
                                         </div>
@@ -48,7 +48,7 @@ const Print = ({ props }) => {
                                         </div>
                                     </div>
                                     <div className="flex justify-between">
-                                        <div>
+                                        <div className="italic">
                                             {educationItem.degree ||
                                                 '[Your Degree]'}
                                         </div>
@@ -75,14 +75,14 @@ const Print = ({ props }) => {
                         {projects.map((projectItem) => {
                             return (
                                 <div key={projectItem.key}>
-                                    <div className="flex justify-between font-bold">
-                                        <span>
+                                    <div className="flex justify-between">
+                                        <span className="font-bold">
                                             {projectItem.name ||
                                                 '[Project Name]'}
                                         </span>
                                         <span>
                                             {projectItem.period ||
-                                                '[Month Year]'}
+                                                '[From - To]'}
                                         </span>
                                     </div>
                                     <ul>
@@ -122,11 +122,11 @@ const Print = ({ props }) => {
                                             {expItem.position || '[Position]'}
                                         </span>
                                         <span>
-                                            {expItem.period || '[Month Year]'}
+                                            {expItem.period || '[From - To]'}
                                         </span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span>
+                                        <span className="italic">
                                             {expItem.company || '[Company]'}
                                         </span>
                                         <span className="italic">
