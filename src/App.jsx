@@ -72,13 +72,25 @@ function App() {
     };
 
     const handleAddProjectClick = () => {
+        // The key for the first responsibility of this project
+        const firstResponsibilityKey = uuidv4();
+
         setProjects([
             ...projects,
             {
                 key: uuidv4(),
                 name: '',
                 period: '',
-                responsibilities: [],
+                responsibilities: [firstResponsibilityKey],
+            },
+        ]);
+
+        // Add in a first one automatically
+        setProjectResponsibilities([
+            ...projectResponsibilities,
+            {
+                key: firstResponsibilityKey,
+                description: '',
             },
         ]);
     };
