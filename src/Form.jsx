@@ -170,40 +170,44 @@ const Form = ({ props }) => {
                                     }
                                 />
                             </div>
-                            <ul className="flex flex-col justify-center gap-4">
-                                {projectItem.responsibilities.map(
-                                    (responsibilityKey, index) => {
-                                        return (
-                                            <li
-                                                key={responsibilityKey}
-                                                className="flex gap-4"
-                                            >
-                                                <Input
-                                                    placeholder={++index}
-                                                    onChange={(e) =>
-                                                        handleProjectResponsibilitiesOnChange(
-                                                            e,
-                                                            'description',
-                                                            responsibilityKey,
-                                                        )
-                                                    }
-                                                />
-                                                <div className="flex basis-20">
-                                                    <Button
-                                                        text="-"
-                                                        handleClick={() =>
-                                                            handleRemoveProjectResponsibilityClick(
-                                                                projectItem.key,
+                            {projectItem.responsibilities.length != 0 ? (
+                                <ul className="flex flex-col justify-center gap-4">
+                                    {projectItem.responsibilities.map(
+                                        (responsibilityKey, index) => {
+                                            return (
+                                                <li
+                                                    key={responsibilityKey}
+                                                    className="flex gap-4"
+                                                >
+                                                    <Input
+                                                        placeholder={++index}
+                                                        onChange={(e) =>
+                                                            handleProjectResponsibilitiesOnChange(
+                                                                e,
+                                                                'description',
                                                                 responsibilityKey,
                                                             )
                                                         }
                                                     />
-                                                </div>
-                                            </li>
-                                        );
-                                    },
-                                )}
-                            </ul>
+                                                    <div className="flex basis-20">
+                                                        <Button
+                                                            text="-"
+                                                            handleClick={() =>
+                                                                handleRemoveProjectResponsibilityClick(
+                                                                    projectItem.key,
+                                                                    responsibilityKey,
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                </li>
+                                            );
+                                        },
+                                    )}
+                                </ul>
+                            ) : (
+                                ''
+                            )}
 
                             <Button
                                 text="Remove"
