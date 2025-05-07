@@ -9,6 +9,8 @@ function App() {
     const [education, setEducation] = useState([]);
     const [projects, setProjects] = useState([]);
     const [projectResponsibilities, setProjectResponsibilities] = useState([]);
+    const [experiences, setExperiences] = useState([]);
+    const [experienceResponsibilities, setExperienceResponsibilities] = useState([]);
 
     // PROFILE
     const handleProfileOnChange = (e, name) => {
@@ -20,6 +22,20 @@ function App() {
      An array was used here because I needed to retain where the position
      of the items are.
     */
+    const handleAddEducationClick = () => {
+        setEducation([
+            ...education,
+            {
+                key: uuidv4(),
+                location: '',
+                school: '',
+                degree: '',
+                from: '',
+                to: '',
+            },
+        ]);
+    };
+
     const handleEducationOnChange = (e, name, educationItem) => {
         // find index of the education item with received key from the caller
         const index = education.findIndex(
@@ -35,20 +51,6 @@ function App() {
         };
 
         setEducation(newEducation);
-    };
-
-    const handleAddEducationClick = () => {
-        setEducation([
-            ...education,
-            {
-                key: uuidv4(),
-                location: '',
-                school: '',
-                degree: '',
-                from: '',
-                to: '',
-            },
-        ]);
     };
 
     const handleRemoveEducationClick = (key) => {
@@ -162,12 +164,122 @@ function App() {
         );
     };
 
+    // EXPERIENCES
+    const handleAddExperienceClick = () => {
+        // The key for the first responsibility of this experience
+        const firstResponsibilityKey = uuidv4();
+
+        setExperiences([
+            ...experiences,
+            {
+                key: uuidv4(),
+                position: '',
+                company: '',
+                place: '',
+                period: '',
+                responsibilities: [firstResponsibilityKey],
+            },
+        ]);
+
+        // Add in a first one automatically
+        setExperienceResponsibilities([
+            ...experienceResponsibilities,
+            {
+                key: firstResponsibilityKey,
+                description: '',
+            },
+        ]);
+    };
+
+    const handleExperiencesOnChange = (e, name, expItem) => {
+        const index = experiences.findIndex(
+            (exp) => exp.key === expItem.key,
+        );
+
+        const newExperiences = [...experiences];
+        newExperiences[index] = {
+            ...expItem,
+            [name]: e.target.value,
+        };
+
+        setExperiences(newExperiences);
+    };
+
+    const handleRemoveExperienceClick = (key) => {
+        setExperiences(experiences.filter((expItem) => expItem.key !== key));
+    };
+
+    const handleAddExperienceResponsibilityClick = (expItemKey) => {
+        const itemKey = uuidv4();
+
+        const index = experiences.findIndex((e) => e.key === expItemKey);
+
+        const newExperiences = [...experiences];
+
+        newExperiences[index] = {
+            key: expItemKey,
+            name: experiences[index].name,
+            period: experiences[index].period,
+            responsibilities: [...experiences[index].responsibilities, itemKey],
+        };
+
+        setExperiences(newExperiences);
+
+        setExperienceResponsibilities([
+            ...experienceResponsibilities,
+            {
+                key: itemKey,
+                description: '',
+            },
+        ]);
+    };
+
+    const handleExperienceResponsibilitiesOnChange = (
+        e,
+        name,
+        responsibilityKey,
+    ) => {
+        const index = experienceResponsibilities.findIndex(
+            (er) => er.key === responsibilityKey,
+        );
+
+        const newResponsibilities = [...experienceResponsibilities];
+
+        newResponsibilities[index] = {
+            ...projectResponsibilities[index],
+            [name]: e.target.value,
+        };
+
+        setExperienceResponsibilities(newResponsibilities);
+    };
+
+    const handleRemoveExperienceResponsibilityClick = (expKey, itemKey) => {
+        const index = experiences.findIndex((e) => e.key === expKey);
+
+        const newExperiences = [...experiences];
+
+        newExperiences[index] = {
+            ...experiences[index],
+            responsibilities: experiences[index].responsibilities.filter(
+                (item) => item !== itemKey,
+            ),
+        };
+
+        setExperiences(newExperiences);
+
+        setExperienceResponsibilities(
+            experienceResponsibilities.filter((item) => item.key !== itemKey),
+        );
+    };
+
     const props = {
         states: {
             profile,
             education,
             projects,
             projectResponsibilities,
+            experiences,
+            experienceResponsibilities
         },
         // Profile
         handleProfileOnChange,
@@ -182,7 +294,13 @@ function App() {
         handleAddProjectResponsibilityClick,
         handleRemoveProjectResponsibilityClick,
         handleProjectResponsibilitiesOnChange,
-        // TODO Experience
+        // Experience
+        handleExperiencesOnChange,
+        handleAddExperienceClick,
+        handleRemoveExperienceClick,
+        handleAddExperienceResponsibilityClick,
+        handleRemoveExperienceResponsibilityClick,
+        handleExperienceResponsibilitiesOnChange,
         // TODO Skills
     };
 

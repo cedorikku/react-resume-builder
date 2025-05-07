@@ -5,7 +5,7 @@ import { FormSection } from './components/layouts/FormSection';
 
 const Form = ({ props }) => {
     const {
-        states: { profile, education, projects, projectResponsibilities },
+        states: { profile, education, projects, experiences },
         handleProfileOnChange,
         handleAddEducationClick,
         handleRemoveEducationClick,
@@ -16,6 +16,12 @@ const Form = ({ props }) => {
         handleProjectResponsibilitiesOnChange,
         handleAddProjectResponsibilityClick,
         handleRemoveProjectResponsibilityClick,
+        handleExperiencesOnChange,
+        handleAddExperienceClick,
+        handleRemoveExperienceClick,
+        handleAddExperienceResponsibilityClick,
+        handleRemoveExperienceResponsibilityClick,
+        handleExperienceResponsibilitiesOnChange,
     } = props;
 
     return (
@@ -225,7 +231,125 @@ const Form = ({ props }) => {
                 />
             </FormSection>
 
-            <FormSection name="Experience"></FormSection>
+            <FormSection name="Experience">
+                {experiences.map((expItem) => {
+                    return (
+                        <div key={expItem.key} className="input-group">
+                            <Input
+                                label="Position"
+                                value={expItem.position || ''}
+                                onChange={(e) =>
+                                    handleExperiencesOnChange(
+                                        e,
+                                        'position',
+                                        expItem,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Company"
+                                value={expItem.company || ''}
+                                onChange={(e) =>
+                                    handleExperiencesOnChange(
+                                        e,
+                                        'company',
+                                        expItem,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Place"
+                                value={expItem.place || ''}
+                                onChange={(e) =>
+                                    handleExperiencesOnChange(
+                                        e,
+                                        'place',
+                                        expItem,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Period"
+                                value={expItem.period || ''}
+                                onChange={(e) =>
+                                    handleExperiencesOnChange(
+                                        e,
+                                        'period',
+                                        expItem,
+                                    )
+                                }
+                            />
+
+                            <div className="flex items-center gap-8">
+                                <label className="text-sm font-medium">
+                                    Responsibilities
+                                </label>
+                                <Button
+                                    text="+"
+                                    handleClick={() =>
+                                        handleAddExperienceResponsibilityClick(
+                                            expItem.key,
+                                        )
+                                    }
+                                />
+                            </div>
+                            {expItem.responsibilities.length != 0 ? (
+                                <ul className="flex flex-col justify-center gap-4">
+                                    {expItem.responsibilities.map(
+                                        (responsibilityKey, index) => {
+                                            return (
+                                                <li
+                                                    key={responsibilityKey}
+                                                    className="flex gap-4"
+                                                >
+                                                    <Input
+                                                        placeholder={++index}
+                                                        onChange={(e) =>
+                                                            handleExperienceResponsibilitiesOnChange(
+                                                                e,
+                                                                'description',
+                                                                responsibilityKey,
+                                                            )
+                                                        }
+                                                    />
+                                                    <div className="flex basis-20">
+                                                        <Button
+                                                            text="-"
+                                                            handleClick={() =>
+                                                                handleRemoveExperienceResponsibilityClick(
+                                                                    expItem.key,
+                                                                    responsibilityKey,
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                </li>
+                                            );
+                                        },
+                                    )}
+                                </ul>
+                            ) : (
+                                ''
+                            )}
+
+                            <Button
+                                text="Remove"
+                                handleClick={() =>
+                                    handleRemoveExperienceClick(expItem.key)
+                                }
+                            />
+                        </div>
+                    );
+                })}
+
+                <Button
+                    text="Add Experience"
+                    handleClick={handleAddExperienceClick}
+                />
+            </FormSection>
 
             <FormSection name="Skills"></FormSection>
         </form>
