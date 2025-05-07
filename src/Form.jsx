@@ -260,24 +260,24 @@ const Form = ({ props }) => {
                             />
 
                             <Input
-                                label="Place"
-                                value={expItem.place || ''}
-                                onChange={(e) =>
-                                    handleExperiencesOnChange(
-                                        e,
-                                        'place',
-                                        expItem,
-                                    )
-                                }
-                            />
-
-                            <Input
                                 label="Period"
                                 value={expItem.period || ''}
                                 onChange={(e) =>
                                     handleExperiencesOnChange(
                                         e,
                                         'period',
+                                        expItem,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Place"
+                                value={expItem.place || ''}
+                                onChange={(e) =>
+                                    handleExperiencesOnChange(
+                                        e,
+                                        'place',
                                         expItem,
                                     )
                                 }

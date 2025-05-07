@@ -10,7 +10,8 @@ function App() {
     const [projects, setProjects] = useState([]);
     const [projectResponsibilities, setProjectResponsibilities] = useState([]);
     const [experiences, setExperiences] = useState([]);
-    const [experienceResponsibilities, setExperienceResponsibilities] = useState([]);
+    const [experienceResponsibilities, setExperienceResponsibilities] =
+        useState([]);
 
     // PROFILE
     const handleProfileOnChange = (e, name) => {
@@ -192,9 +193,7 @@ function App() {
     };
 
     const handleExperiencesOnChange = (e, name, expItem) => {
-        const index = experiences.findIndex(
-            (exp) => exp.key === expItem.key,
-        );
+        const index = experiences.findIndex((exp) => exp.key === expItem.key);
 
         const newExperiences = [...experiences];
         newExperiences[index] = {
@@ -279,7 +278,7 @@ function App() {
             projects,
             projectResponsibilities,
             experiences,
-            experienceResponsibilities
+            experienceResponsibilities,
         },
         // Profile
         handleProfileOnChange,
