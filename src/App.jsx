@@ -169,16 +169,21 @@ function App() {
             projects,
             projectResponsibilities,
         },
+        // Profile
         handleProfileOnChange,
+        // Education
         handleAddEducationClick,
         handleRemoveEducationClick,
         handleEducationOnChange,
+        // Projects
         handleProjectsOnChange,
         handleAddProjectClick,
         handleRemoveProjectClick,
         handleAddProjectResponsibilityClick,
         handleRemoveProjectResponsibilityClick,
         handleProjectResponsibilitiesOnChange,
+        // TODO Experience
+        // TODO Skills
     };
 
     return (
