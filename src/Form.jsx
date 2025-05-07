@@ -1,6 +1,6 @@
 import './styles/Form.css';
 import Input from './components/Input';
-import Button from './components/Button';
+import Button, { ButtonRed } from './components/Button';
 import { FormSection } from './components/layouts/FormSection';
 
 const Form = ({ props }) => {
@@ -118,7 +118,7 @@ const Form = ({ props }) => {
                                 />
                             </div>
 
-                            <Button
+                            <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
                                     handleRemoveEducationClick(
@@ -196,7 +196,7 @@ const Form = ({ props }) => {
                                                         }
                                                     />
                                                     <div className="flex basis-20">
-                                                        <Button
+                                                        <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
                                                                 handleRemoveProjectResponsibilityClick(
@@ -215,7 +215,7 @@ const Form = ({ props }) => {
                                 ''
                             )}
 
-                            <Button
+                            <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
                                     handleRemoveProjectClick(projectItem.key)
@@ -316,7 +316,7 @@ const Form = ({ props }) => {
                                                         }
                                                     />
                                                     <div className="flex basis-20">
-                                                        <Button
+                                                        <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
                                                                 handleRemoveExperienceResponsibilityClick(
@@ -335,7 +335,7 @@ const Form = ({ props }) => {
                                 ''
                             )}
 
-                            <Button
+                            <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
                                     handleRemoveExperienceClick(expItem.key)
