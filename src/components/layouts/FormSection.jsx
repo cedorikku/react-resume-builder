@@ -1,7 +1,10 @@
 export const FormSection = ({ name, children }) => {
     return (
-        <section id={name.toLowerCase() + '-form'} className="mb-4">
-            <h2 className="flex justify-center">{name}</h2>
+        <section
+            id={name.toLowerCase() + '-form'}
+            className="mb-16 rounded-lg border border-white/30 bg-zinc-900 p-16"
+        >
+            <h2 className="flex justify-center font-bold">{name}</h2>
             {children}
         </section>
     );
