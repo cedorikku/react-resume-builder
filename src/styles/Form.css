@@ -3,3 +3,9 @@
     flex-grow: 1;
     gap: 1rem;
 }
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

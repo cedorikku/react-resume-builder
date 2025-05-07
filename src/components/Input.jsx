@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 const Input = ({ type = 'text', label, placeholder, onChange }) => {
     const id = uuidv4();
     return (
-        <div className="input-group flex w-[100%] flex-col gap-1">
+        <div className="flex w-[100%] flex-col gap-1">
             <label className="text-sm font-medium" htmlFor={id}>
                 {label || ''}
             </label>

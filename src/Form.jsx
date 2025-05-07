@@ -21,36 +21,38 @@ const Form = ({ props }) => {
     return (
         <form className="form min-w-350 flex-none rounded-lg border border-white/25 p-16 text-lg text-sm text-white">
             <FormSection name="Profile">
-                <Input
-                    type="text"
-                    label="Name"
-                    value={profile.name || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'name')}
-                />
-                <Input
-                    type="text"
-                    label="Address"
-                    value={profile.address || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'address')}
-                />
-                <Input
-                    type="email"
-                    label="Email"
-                    value={profile.email || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'email')}
-                />
-                <Input
-                    type="tel"
-                    label="Phone"
-                    value={profile.phone || ''}
-                    onChange={(e) => handleProfileOnChange(e, 'phone')}
-                />
+                <div className="input-group">
+                    <Input
+                        type="text"
+                        label="Name"
+                        value={profile.name || ''}
+                        onChange={(e) => handleProfileOnChange(e, 'name')}
+                    />
+                    <Input
+                        type="text"
+                        label="Address"
+                        value={profile.address || ''}
+                        onChange={(e) => handleProfileOnChange(e, 'address')}
+                    />
+                    <Input
+                        type="email"
+                        label="Email"
+                        value={profile.email || ''}
+                        onChange={(e) => handleProfileOnChange(e, 'email')}
+                    />
+                    <Input
+                        type="tel"
+                        label="Phone"
+                        value={profile.phone || ''}
+                        onChange={(e) => handleProfileOnChange(e, 'phone')}
+                    />
+                </div>
             </FormSection>
 
             <FormSection name="Education">
                 {education.map((educationItem) => {
                     return (
-                        <div key={educationItem.key}>
+                        <div key={educationItem.key} className="input-group">
                             <Input
                                 label="School"
                                 value={educationItem.school || ''}
@@ -130,7 +132,7 @@ const Form = ({ props }) => {
             <FormSection name="Projects">
                 {projects.map((projectItem) => {
                     return (
-                        <div key={projectItem.key}>
+                        <div key={projectItem.key} className="input-group">
                             <Input
                                 label="Name"
                                 value={projectItem.name || ''}
