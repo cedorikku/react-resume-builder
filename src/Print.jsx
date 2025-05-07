@@ -3,7 +3,14 @@ import './styles/Print.css';
 import { PrintSection } from './components/layouts/PrintSection';
 
 const Print = ({ props }) => {
-    const { profile, education, projects, projectResponsibilities } = props;
+    const {
+        profile,
+        education,
+        projects,
+        projectResponsibilities,
+        experiences,
+        experienceResponsibilities,
+    } = props;
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -91,6 +98,54 @@ const Print = ({ props }) => {
                                                           <li key={key}>
                                                               {responsibility.description ||
                                                                   '[A Description]'}
+                                                          </li>
+                                                      );
+                                                  },
+                                              )
+                                            : ''}
+                                    </ul>
+                                </div>
+                            );
+                        })}
+                    </PrintSection>
+                ) : (
+                    ''
+                )}
+
+                {experiences.length != 0 ? (
+                    <PrintSection name="Experience">
+                        {experiences.map((expItem) => {
+                            return (
+                                <div key={expItem.key} className="exp-item">
+                                    <div className="flex justify-between">
+                                        <span className="font-bold">
+                                            {expItem.position || '[Position]'}
+                                        </span>
+                                        <span>
+                                            {expItem.period || '[Month Year]'}
+                                        </span>
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <span>
+                                            {expItem.company || '[Company]'}
+                                        </span>
+                                        <span className="italic">
+                                            {expItem.place || '[City, State]'}
+                                        </span>
+                                    </div>
+                                    <ul>
+                                        {experienceResponsibilities.length != 0
+                                            ? expItem.responsibilities.map(
+                                                  (key) => {
+                                                      const responsibility =
+                                                          experienceResponsibilities.find(
+                                                              (r) =>
+                                                                  r.key === key,
+                                                          );
+                                                      return (
+                                                          <li key={key}>
+                                                              {responsibility.description ||
+                                                                  '[A Description about this job]'}
                                                           </li>
                                                       );
                                                   },
