@@ -10,6 +10,7 @@ const Print = ({ props }) => {
         projectResponsibilities,
         experiences,
         experienceResponsibilities,
+        skills,
     } = props;
 
     return (
@@ -160,7 +161,34 @@ const Print = ({ props }) => {
                     ''
                 )}
 
-                {/* Put more print body sections (component) down here */}
+                {skills.length != 0 ? (
+                    <PrintSection name="Skills">
+                        <ul>
+                            {skills.map((skillItem) => {
+                                return (
+                                    <li
+                                        key={skillItem.key}
+                                        className="skill-item"
+                                    >
+                                        {skillItem.category ? (
+                                            <span className="mr-4 font-bold">
+                                                {skillItem.category}:
+                                            </span>
+                                        ) : (
+                                            <span className="mr-4 font-bold">
+                                                [Category]:
+                                            </span>
+                                        )}
+                                        {skillItem.values ||
+                                            '[Skill 1, Skill 2, Skill 3, Skill 4]'}
+                                    </li>
+                                );
+                            })}
+                        </ul>
+                    </PrintSection>
+                ) : (
+                    ''
+                )}
             </div>
         </div>
     );

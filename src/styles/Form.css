@@ -11,3 +11,6 @@
     gap: 1rem;
     margin-bottom: 0.5rem;
 }
+.two-col.short-long > div:first-child {
+    flex-basis: 30ch;
+}
