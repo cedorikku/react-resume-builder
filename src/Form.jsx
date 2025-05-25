@@ -25,7 +25,7 @@ const Form = ({ props }) => {
     } = props;
 
     return (
-        <form className="form min-w-350 flex-none text-sm text-white">
+        <form className="form min-w-300 flex-none text-sm text-white">
             <FormSection name="Profile">
                 <div className="input-group">
                     <Input
@@ -351,6 +351,7 @@ const Form = ({ props }) => {
                 />
             </FormSection>
 
+            {/* TODO skills with category bullet point section */}
             <FormSection name="Skills"></FormSection>
         </form>
     );

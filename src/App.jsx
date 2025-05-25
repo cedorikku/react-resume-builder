@@ -306,7 +306,6 @@ function App() {
     return (
         <div className="flex flex-wrap justify-center gap-8 p-8">
             <Form props={props} />
-
             <Print props={props.states} />
         </div>
     );
