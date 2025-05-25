@@ -12,6 +12,7 @@ function App() {
     const [experiences, setExperiences] = useState([]);
     const [experienceResponsibilities, setExperienceResponsibilities] =
         useState([]);
+    const [skills, setSkills] = useState([]);
 
     // PROFILE
     const handleProfileOnChange = (e, name) => {
@@ -269,6 +270,34 @@ function App() {
         );
     };
 
+    const handleSkillsOnChange = (e, name, skillKey) => {
+        const index = skills.findIndex((s) => s.key === skillKey);
+
+        const newSkills = [...skills];
+
+        newSkills[index] = {
+            ...skills[index],
+            [name]: e.target.value,
+        };
+
+        setSkills(newSkills);
+    };
+
+    const handleAddSkills = () => {
+        setSkills([
+            ...skills,
+            {
+                key: uuidv4(),
+                category: '',
+                values: '',
+            },
+        ]);
+    };
+
+    const handleRemoveSkills = (key) => {
+        setSkills(skills.filter((skill) => skill.key !== key));
+    };
+
     const props = {
         states: {
             profile,
@@ -277,6 +306,7 @@ function App() {
             projectResponsibilities,
             experiences,
             experienceResponsibilities,
+            skills,
         },
         // Profile
         handleProfileOnChange,
@@ -298,7 +328,10 @@ function App() {
         handleAddExperienceResponsibilityClick,
         handleRemoveExperienceResponsibilityClick,
         handleExperienceResponsibilitiesOnChange,
-        // TODO Skills
+        // Skills
+        handleSkillsOnChange,
+        handleAddSkills,
+        handleRemoveSkills,
     };
 
     return (

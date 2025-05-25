@@ -5,7 +5,7 @@ import { FormSection } from './components/layouts/FormSection';
 
 const Form = ({ props }) => {
     const {
-        states: { profile, education, projects, experiences },
+        states: { profile, education, projects, experiences, skills },
         handleProfileOnChange,
         handleAddEducationClick,
         handleRemoveEducationClick,
@@ -22,6 +22,9 @@ const Form = ({ props }) => {
         handleAddExperienceResponsibilityClick,
         handleRemoveExperienceResponsibilityClick,
         handleExperienceResponsibilitiesOnChange,
+        handleSkillsOnChange,
+        handleAddSkills,
+        handleRemoveSkills,
     } = props;
 
     return (
@@ -351,8 +354,44 @@ const Form = ({ props }) => {
                 />
             </FormSection>
 
-            {/* TODO skills with category bullet point section */}
-            <FormSection name="Skills"></FormSection>
+            {/* skills with category bullet point section */}
+            <FormSection name="Skills">
+                {skills.map((skillItem) => (
+                    <div key={skillItem.key} className="input-group">
+                        <div className="two-col short-long">
+                            <Input
+                                label="Category"
+                                value={skillItem.category || ''}
+                                onChange={(e) =>
+                                    handleSkillsOnChange(
+                                        e,
+                                        'category',
+                                        skillItem.key,
+                                    )
+                                }
+                            />
+                            <Input
+                                label="List of skills"
+                                value={skillItem.values || ''}
+                                onChange={(e) =>
+                                    handleSkillsOnChange(
+                                        e,
+                                        'values',
+                                        skillItem.key,
+                                    )
+                                }
+                            />
+                        </div>
+                        <ButtonRed
+                            text="Remove"
+                            handleClick={() =>
+                                handleRemoveSkills(skillItem.key)
+                            }
+                        />
+                    </div>
+                ))}
+                <Button text="Add Skill" handleClick={handleAddSkills} />
+            </FormSection>
         </form>
     );
 };
