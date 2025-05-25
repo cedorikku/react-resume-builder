@@ -216,9 +216,7 @@ function App() {
         const newExperiences = [...experiences];
 
         newExperiences[index] = {
-            key: expItemKey,
-            name: experiences[index].name,
-            period: experiences[index].period,
+            ...experiences[index],
             responsibilities: [...experiences[index].responsibilities, itemKey],
         };
 
