@@ -38,21 +38,19 @@ function App() {
         ]);
     };
 
-    const handleEducationOnChange = (e, name, educationItem) => {
-        // find index of the education item with received key from the caller
-        const index = education.findIndex(
-            (edu) => edu.key === educationItem.key,
+    const handleEducationOnChange = (e, name, itemKey) => {
+        setEducation(
+            education.map((edu) => {
+                if (edu.key === itemKey) {
+                    return {
+                        ...edu,
+                        [name]: e.target.value,
+                    };
+                }
+
+                return edu;
+            }),
         );
-
-        // create a new array, then replace the education item at the index
-        const newEducation = [...education];
-
-        newEducation[index] = {
-            ...educationItem,
-            [name]: e.target.value,
-        };
-
-        setEducation(newEducation);
     };
 
     const handleRemoveEducationClick = (key) => {
@@ -60,19 +58,19 @@ function App() {
     };
 
     // PROJECTS
-    const handleProjectsOnChange = (e, name, projectItem) => {
-        const index = projects.findIndex(
-            (proj) => proj.key === projectItem.key,
+    const handleProjectsOnChange = (e, name, itemKey) => {
+        setProjects(
+            projects.map((proj) => {
+                if (proj.key === itemKey) {
+                    return {
+                        ...proj,
+                        [name]: e.target.value,
+                    };
+                }
+
+                return proj;
+            }),
         );
-
-        const newProjects = [...projects];
-
-        newProjects[index] = {
-            ...projectItem,
-            [name]: e.target.value,
-        };
-
-        setProjects(newProjects);
     };
 
     const handleAddProjectClick = () => {
@@ -103,63 +101,63 @@ function App() {
         setProjects(projects.filter((projItem) => projItem.key !== key));
     };
 
-    const handleAddProjectResponsibilityClick = (projectItemKey) => {
-        const itemKey = uuidv4();
+    const handleAddProjectResponsibilityClick = (itemKey) => {
+        const newResponsibilityKey = uuidv4();
 
-        const index = projects.findIndex((p) => p.key === projectItemKey);
-
-        const newProjects = [...projects];
-
-        newProjects[index] = {
-            key: projectItemKey,
-            name: projects[index].name,
-            period: projects[index].period,
-            responsibilities: [...projects[index].responsibilities, itemKey],
-        };
-
-        setProjects(newProjects);
+        setProjects(
+            projects.map((proj) => {
+                if (proj.key === itemKey) {
+                    return {
+                        ...proj,
+                        responsibilities: [
+                            ...proj.responsibilities,
+                            newResponsibilityKey,
+                        ],
+                    };
+                }
+                return proj;
+            }),
+        );
 
         setProjectResponsibilities([
             ...projectResponsibilities,
             {
-                key: itemKey,
+                key: newResponsibilityKey,
                 description: '',
             },
         ]);
     };
 
-    const handleProjectResponsibilitiesOnChange = (
-        e,
-        name,
-        responsibilityKey,
-    ) => {
-        const index = projectResponsibilities.findIndex(
-            (pr) => pr.key === responsibilityKey,
+    const handleProjectResponsibilitiesOnChange = (e, name, itemKey) => {
+        setProjectResponsibilities(
+            projectResponsibilities.map((pr) => {
+                if (pr.key === itemKey) {
+                    return {
+                        ...pr,
+                        [name]: e.target.value,
+                    };
+                }
+
+                return pr;
+            }),
         );
-
-        const newProjectResponsibilities = [...projectResponsibilities];
-
-        newProjectResponsibilities[index] = {
-            ...projectResponsibilities[index],
-            [name]: e.target.value,
-        };
-
-        setProjectResponsibilities(newProjectResponsibilities);
     };
 
     const handleRemoveProjectResponsibilityClick = (projectKey, itemKey) => {
-        const index = projects.findIndex((p) => p.key === projectKey);
+        setProjects(
+            projects.map((proj) => {
+                if (proj.key === projectKey) {
+                    return {
+                        ...proj,
+                        responsibilities: proj.responsibilities.filter(
+                            (item) => item !== itemKey,
+                        ),
+                    };
+                }
 
-        const newProjects = [...projects];
-
-        newProjects[index] = {
-            ...projects[index],
-            responsibilities: projects[index].responsibilities.filter(
-                (item) => item !== itemKey,
-            ),
-        };
-
-        setProjects(newProjects);
+                return proj;
+            }),
+        );
 
         setProjectResponsibilities(
             projectResponsibilities.filter((item) => item.key !== itemKey),
@@ -193,94 +191,102 @@ function App() {
         ]);
     };
 
-    const handleExperiencesOnChange = (e, name, expItem) => {
-        const index = experiences.findIndex((exp) => exp.key === expItem.key);
+    const handleExperiencesOnChange = (e, name, itemKey) => {
+        setExperiences(
+            experiences.map((exp) => {
+                if (exp.key === itemKey) {
+                    return {
+                        ...exp,
+                        [name]: e.target.value,
+                    };
+                }
 
-        const newExperiences = [...experiences];
-        newExperiences[index] = {
-            ...expItem,
-            [name]: e.target.value,
-        };
-
-        setExperiences(newExperiences);
+                return exp;
+            }),
+        );
     };
 
     const handleRemoveExperienceClick = (key) => {
         setExperiences(experiences.filter((expItem) => expItem.key !== key));
     };
 
-    const handleAddExperienceResponsibilityClick = (expItemKey) => {
-        const itemKey = uuidv4();
+    const handleAddExperienceResponsibilityClick = (itemKey) => {
+        const newResponsibilityKey = uuidv4();
 
-        const index = experiences.findIndex((e) => e.key === expItemKey);
+        setExperiences(
+            experiences.map((exp) => {
+                if (exp.key === itemKey) {
+                    return {
+                        ...exp,
+                        responsibilities: [
+                            ...exp.responsibilities,
+                            newResponsibilityKey,
+                        ],
+                    };
+                }
 
-        const newExperiences = [...experiences];
-
-        newExperiences[index] = {
-            ...experiences[index],
-            responsibilities: [...experiences[index].responsibilities, itemKey],
-        };
-
-        setExperiences(newExperiences);
+                return exp;
+            }),
+        );
 
         setExperienceResponsibilities([
             ...experienceResponsibilities,
             {
-                key: itemKey,
+                key: newResponsibilityKey,
                 description: '',
             },
         ]);
     };
 
-    const handleExperienceResponsibilitiesOnChange = (
-        e,
-        name,
-        responsibilityKey,
-    ) => {
-        const index = experienceResponsibilities.findIndex(
-            (er) => er.key === responsibilityKey,
+    const handleExperienceResponsibilitiesOnChange = (e, name, itemKey) => {
+        setExperienceResponsibilities(
+            experienceResponsibilities.map((er) => {
+                if (er.key === itemKey) {
+                    return {
+                        ...er,
+                        [name]: e.target.value,
+                    };
+                }
+
+                return er;
+            }),
         );
-
-        const newResponsibilities = [...experienceResponsibilities];
-
-        newResponsibilities[index] = {
-            ...experienceResponsibilities[index],
-            [name]: e.target.value,
-        };
-
-        setExperienceResponsibilities(newResponsibilities);
     };
 
     const handleRemoveExperienceResponsibilityClick = (expKey, itemKey) => {
-        const index = experiences.findIndex((e) => e.key === expKey);
+        setExperiences(
+            experiences.map((exp) => {
+                if (exp.key === expKey) {
+                    return {
+                        ...exp,
+                        responsibilities: exp.responsibilities.filter(
+                            (item) => item !== itemKey,
+                        ),
+                    };
+                }
 
-        const newExperiences = [...experiences];
-
-        newExperiences[index] = {
-            ...experiences[index],
-            responsibilities: experiences[index].responsibilities.filter(
-                (item) => item !== itemKey,
-            ),
-        };
-
-        setExperiences(newExperiences);
+                return exp;
+            }),
+        );
 
         setExperienceResponsibilities(
             experienceResponsibilities.filter((item) => item.key !== itemKey),
         );
     };
 
-    const handleSkillsOnChange = (e, name, skillKey) => {
-        const index = skills.findIndex((s) => s.key === skillKey);
+    const handleSkillsOnChange = (e, name, itemKey) => {
+        setSkills(
+            skills.map((skill) => {
+                if (skill.key === itemKey) {
+                    return {
+                        ...skill,
+                        [name]: e.target.value,
+                    };
+                }
 
-        const newSkills = [...skills];
-
-        newSkills[index] = {
-            ...skills[index],
-            [name]: e.target.value,
-        };
-
-        setSkills(newSkills);
+                return skill;
+            }),
+        );
     };
 
     const handleAddSkills = () => {

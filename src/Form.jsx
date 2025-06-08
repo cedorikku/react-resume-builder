@@ -71,7 +71,7 @@ const Form = ({ props }) => {
                                     handleEducationOnChange(
                                         e,
                                         'school',
-                                        educationItem,
+                                        educationItem.key,
                                     )
                                 }
                             />
@@ -82,7 +82,7 @@ const Form = ({ props }) => {
                                     handleEducationOnChange(
                                         e,
                                         'location',
-                                        educationItem,
+                                        educationItem.key,
                                     )
                                 }
                             />
@@ -93,7 +93,7 @@ const Form = ({ props }) => {
                                     handleEducationOnChange(
                                         e,
                                         'degree',
-                                        educationItem,
+                                        educationItem.key,
                                     )
                                 }
                             />
@@ -106,7 +106,7 @@ const Form = ({ props }) => {
                                         handleEducationOnChange(
                                             e,
                                             'from',
-                                            educationItem,
+                                            educationItem.key,
                                         )
                                     }
                                 />
@@ -117,7 +117,7 @@ const Form = ({ props }) => {
                                         handleEducationOnChange(
                                             e,
                                             'to',
-                                            educationItem,
+                                            educationItem.key,
                                         )
                                     }
                                 />
@@ -151,7 +151,7 @@ const Form = ({ props }) => {
                                     handleProjectsOnChange(
                                         e,
                                         'name',
-                                        projectItem,
+                                        projectItem.key,
                                     )
                                 }
                             />
@@ -163,7 +163,7 @@ const Form = ({ props }) => {
                                     handleProjectsOnChange(
                                         e,
                                         'period',
-                                        projectItem,
+                                        projectItem.key,
                                     )
                                 }
                             />
@@ -247,7 +247,7 @@ const Form = ({ props }) => {
                                     handleExperiencesOnChange(
                                         e,
                                         'position',
-                                        expItem,
+                                        expItem.key,
                                     )
                                 }
                             />
@@ -259,7 +259,7 @@ const Form = ({ props }) => {
                                     handleExperiencesOnChange(
                                         e,
                                         'company',
-                                        expItem,
+                                        expItem.key,
                                     )
                                 }
                             />
@@ -271,7 +271,7 @@ const Form = ({ props }) => {
                                         handleExperiencesOnChange(
                                             e,
                                             'period',
-                                            expItem,
+                                            expItem.key,
                                         )
                                     }
                                 />
@@ -282,7 +282,7 @@ const Form = ({ props }) => {
                                         handleExperiencesOnChange(
                                             e,
                                             'place',
-                                            expItem,
+                                            expItem.key,
                                         )
                                     }
                                 />
