@@ -1,10 +1,10 @@
 import './styles/Print.css';
-
 import { PrintSection } from './components/layouts/PrintSection';
+import { ProfileContext } from './profile-context';
+import { useContext } from 'react';
 
 const Print = ({ props }) => {
     const {
-        profile,
         education,
         projects,
         projectResponsibilities,
@@ -12,6 +12,8 @@ const Print = ({ props }) => {
         experienceResponsibilities,
         skills,
     } = props;
+
+    const profile = useContext(ProfileContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -89,20 +91,20 @@ const Print = ({ props }) => {
                                     <ul>
                                         {projectResponsibilities.length != 0
                                             ? projectItem.responsibilities.map(
-                                                  (key) => {
-                                                      const responsibility =
-                                                          projectResponsibilities.find(
-                                                              (r) =>
-                                                                  r.key === key,
-                                                          );
-                                                      return (
-                                                          <li key={key}>
-                                                              {responsibility.description ||
-                                                                  '[A Description]'}
-                                                          </li>
-                                                      );
-                                                  },
-                                              )
+                                                (key) => {
+                                                    const responsibility =
+                                                        projectResponsibilities.find(
+                                                            (r) =>
+                                                                r.key === key,
+                                                        );
+                                                    return (
+                                                        <li key={key}>
+                                                            {responsibility.description ||
+                                                                '[A Description]'}
+                                                        </li>
+                                                    );
+                                                },
+                                            )
                                             : ''}
                                     </ul>
                                 </div>
@@ -137,20 +139,20 @@ const Print = ({ props }) => {
                                     <ul>
                                         {experienceResponsibilities.length != 0
                                             ? expItem.responsibilities.map(
-                                                  (key) => {
-                                                      const responsibility =
-                                                          experienceResponsibilities.find(
-                                                              (r) =>
-                                                                  r.key === key,
-                                                          );
-                                                      return (
-                                                          <li key={key}>
-                                                              {responsibility.description ||
-                                                                  '[A Description about this job]'}
-                                                          </li>
-                                                      );
-                                                  },
-                                              )
+                                                (key) => {
+                                                    const responsibility =
+                                                        experienceResponsibilities.find(
+                                                            (r) =>
+                                                                r.key === key,
+                                                        );
+                                                    return (
+                                                        <li key={key}>
+                                                            {responsibility.description ||
+                                                                '[A Description about this job]'}
+                                                        </li>
+                                                    );
+                                                },
+                                            )
                                             : ''}
                                     </ul>
                                 </div>

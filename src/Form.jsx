@@ -2,11 +2,14 @@ import './styles/Form.css';
 import Input from './components/Input';
 import Button, { ButtonRed } from './components/Button';
 import { FormSection } from './components/layouts/FormSection';
+import { useContext } from 'react';
+import { ProfileContext } from './profile-context';
 
 const Form = ({ props }) => {
+    const profile = useContext(ProfileContext);
+
     const {
-        states: { profile, education, projects, experiences, skills },
-        handleProfileOnChange,
+        states: { education, projects, experiences, skills },
         handleAddEducationClick,
         handleRemoveEducationClick,
         handleEducationOnChange,
@@ -35,26 +38,26 @@ const Form = ({ props }) => {
                         type="text"
                         label="Name"
                         value={profile.name || ''}
-                        onChange={(e) => handleProfileOnChange(e, 'name')}
+                        onChange={(e) => profile.handleProfileOnChange(e, 'name')}
                     />
                     <Input
                         type="text"
                         label="Address"
                         value={profile.address || ''}
-                        onChange={(e) => handleProfileOnChange(e, 'address')}
+                        onChange={(e) => profile.handleProfileOnChange(e, 'address')}
                     />
                     <div className="two-col">
                         <Input
                             type="email"
                             label="Email"
                             value={profile.email || ''}
-                            onChange={(e) => handleProfileOnChange(e, 'email')}
+                            onChange={(e) => profile.handleProfileOnChange(e, 'email')}
                         />
                         <Input
                             type="tel"
                             label="Phone"
                             value={profile.phone || ''}
-                            onChange={(e) => handleProfileOnChange(e, 'phone')}
+                            onChange={(e) => profile.handleProfileOnChange(e, 'phone')}
                         />
                     </div>
                 </div>

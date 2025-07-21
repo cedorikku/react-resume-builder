@@ -4,8 +4,9 @@ import Form from './Form';
 import Print from './Print';
 import { v4 as uuidv4 } from 'uuid';
 
+import { ProfileContextProvider } from './profile-context';
+
 function App() {
-    const [profile, setProfile] = useState({});
     const [education, setEducation] = useState([]);
     const [projects, setProjects] = useState([]);
     const [projectResponsibilities, setProjectResponsibilities] = useState([]);
@@ -13,11 +14,6 @@ function App() {
     const [experienceResponsibilities, setExperienceResponsibilities] =
         useState([]);
     const [skills, setSkills] = useState([]);
-
-    // PROFILE
-    const handleProfileOnChange = (e, name) => {
-        setProfile({ ...profile, [name]: e.target.value });
-    };
 
     // EDUCATION
     /*
@@ -306,7 +302,6 @@ function App() {
 
     const props = {
         states: {
-            profile,
             education,
             projects,
             projectResponsibilities,
@@ -314,8 +309,6 @@ function App() {
             experienceResponsibilities,
             skills,
         },
-        // Profile
-        handleProfileOnChange,
         // Education
         handleAddEducationClick,
         handleRemoveEducationClick,
@@ -341,10 +334,12 @@ function App() {
     };
 
     return (
-        <div className="flex flex-wrap justify-center gap-8 p-8">
-            <Form props={props} />
-            <Print props={props.states} />
-        </div>
+        <ProfileContextProvider>
+            <div className="flex flex-wrap justify-center gap-8 p-8">
+                <Form props={props} />
+                <Print props={props.states} />
+            </div>
+        </ProfileContextProvider>
     );
 }
 
