@@ -1,11 +1,11 @@
 import './styles/Print.css';
 import { PrintSection } from './components/layouts/PrintSection';
 import { ProfileContext } from './profile-context';
+import { EducationContext } from './education-context';
 import { useContext } from 'react';
 
 const Print = ({ props }) => {
     const {
-        education,
         projects,
         projectResponsibilities,
         experiences,
@@ -14,6 +14,7 @@ const Print = ({ props }) => {
     } = props;
 
     const profile = useContext(ProfileContext);
+    const education = useContext(EducationContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -32,9 +33,9 @@ const Print = ({ props }) => {
             </div>
 
             <div className="body">
-                {education.length != 0 ? (
+                {education.items.length != 0 ? (
                     <PrintSection name="Education">
-                        {education.map((educationItem) => {
+                        {education.items.map((educationItem) => {
                             return (
                                 <div
                                     key={educationItem.key}

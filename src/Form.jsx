@@ -4,15 +4,14 @@ import Button, { ButtonRed } from './components/Button';
 import { FormSection } from './components/layouts/FormSection';
 import { useContext } from 'react';
 import { ProfileContext } from './profile-context';
+import { EducationContext } from './education-context';
 
 const Form = ({ props }) => {
     const profile = useContext(ProfileContext);
+    const education = useContext(EducationContext);
 
     const {
-        states: { education, projects, experiences, skills },
-        handleAddEducationClick,
-        handleRemoveEducationClick,
-        handleEducationOnChange,
+        states: { projects, experiences, skills },
         handleProjectsOnChange,
         handleAddProjectClick,
         handleRemoveProjectClick,
@@ -64,14 +63,14 @@ const Form = ({ props }) => {
             </FormSection>
 
             <FormSection name="Education">
-                {education.map((educationItem) => {
+                {education.items.map((educationItem) => {
                     return (
                         <div key={educationItem.key} className="input-group">
                             <Input
                                 label="School"
                                 value={educationItem.school || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(
+                                    education.handleEducationOnChange(
                                         e,
                                         'school',
                                         educationItem.key,
@@ -82,7 +81,7 @@ const Form = ({ props }) => {
                                 label="Location"
                                 value={educationItem.degree || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(
+                                    education.handleEducationOnChange(
                                         e,
                                         'location',
                                         educationItem.key,
@@ -93,7 +92,7 @@ const Form = ({ props }) => {
                                 label="Degree"
                                 value={educationItem.degree || ''}
                                 onChange={(e) =>
-                                    handleEducationOnChange(
+                                    education.handleEducationOnChange(
                                         e,
                                         'degree',
                                         educationItem.key,
@@ -106,7 +105,7 @@ const Form = ({ props }) => {
                                     label="From"
                                     value={educationItem.from || ''}
                                     onChange={(e) =>
-                                        handleEducationOnChange(
+                                        education.handleEducationOnChange(
                                             e,
                                             'from',
                                             educationItem.key,
@@ -117,7 +116,7 @@ const Form = ({ props }) => {
                                     label="To"
                                     value={educationItem.to || ''}
                                     onChange={(e) =>
-                                        handleEducationOnChange(
+                                        education.handleEducationOnChange(
                                             e,
                                             'to',
                                             educationItem.key,
@@ -129,7 +128,7 @@ const Form = ({ props }) => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    handleRemoveEducationClick(
+                                    education.handleRemoveEducationClick(
                                         educationItem.key,
                                     )
                                 }
@@ -139,7 +138,7 @@ const Form = ({ props }) => {
                 })}
                 <Button
                     text="Add Education"
-                    handleClick={handleAddEducationClick}
+                    handleClick={education.handleAddEducationClick}
                 />
             </FormSection>
 

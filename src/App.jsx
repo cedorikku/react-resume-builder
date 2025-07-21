@@ -5,53 +5,15 @@ import Print from './Print';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ProfileContextProvider } from './profile-context';
+import { EducationContextProvider } from './education-context';
 
 function App() {
-    const [education, setEducation] = useState([]);
     const [projects, setProjects] = useState([]);
     const [projectResponsibilities, setProjectResponsibilities] = useState([]);
     const [experiences, setExperiences] = useState([]);
     const [experienceResponsibilities, setExperienceResponsibilities] =
         useState([]);
     const [skills, setSkills] = useState([]);
-
-    // EDUCATION
-    /*
-     An array was used here because I needed to retain where the position
-     of the items are.
-    */
-    const handleAddEducationClick = () => {
-        setEducation([
-            ...education,
-            {
-                key: uuidv4(),
-                location: '',
-                school: '',
-                degree: '',
-                from: '',
-                to: '',
-            },
-        ]);
-    };
-
-    const handleEducationOnChange = (e, name, itemKey) => {
-        setEducation(
-            education.map((edu) => {
-                if (edu.key === itemKey) {
-                    return {
-                        ...edu,
-                        [name]: e.target.value,
-                    };
-                }
-
-                return edu;
-            }),
-        );
-    };
-
-    const handleRemoveEducationClick = (key) => {
-        setEducation(education.filter((eduItem) => eduItem.key !== key));
-    };
 
     // PROJECTS
     const handleProjectsOnChange = (e, name, itemKey) => {
@@ -302,17 +264,12 @@ function App() {
 
     const props = {
         states: {
-            education,
             projects,
             projectResponsibilities,
             experiences,
             experienceResponsibilities,
             skills,
         },
-        // Education
-        handleAddEducationClick,
-        handleRemoveEducationClick,
-        handleEducationOnChange,
         // Projects
         handleProjectsOnChange,
         handleAddProjectClick,
@@ -335,10 +292,12 @@ function App() {
 
     return (
         <ProfileContextProvider>
-            <div className="flex flex-wrap justify-center gap-8 p-8">
-                <Form props={props} />
-                <Print props={props.states} />
-            </div>
+            <EducationContextProvider>
+                <div className="flex flex-wrap justify-center gap-8 p-8">
+                    <Form props={props} />
+                    <Print props={props.states} />
+                </div>
+            </EducationContextProvider>
         </ProfileContextProvider>
     );
 }
