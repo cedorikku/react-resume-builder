@@ -2,12 +2,11 @@ import './styles/Print.css';
 import { PrintSection } from './components/layouts/PrintSection';
 import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
+import { ProjectsContext } from './projects-context';
 import { useContext } from 'react';
 
 const Print = ({ props }) => {
     const {
-        projects,
-        projectResponsibilities,
         experiences,
         experienceResponsibilities,
         skills,
@@ -15,6 +14,7 @@ const Print = ({ props }) => {
 
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
+    const projects = useContext(ProjectsContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -74,9 +74,9 @@ const Print = ({ props }) => {
                     ''
                 )}
 
-                {projects.length != 0 ? (
+                {projects.items.length != 0 ? (
                     <PrintSection name="Projects">
-                        {projects.map((projectItem) => {
+                        {projects.items.map((projectItem) => {
                             return (
                                 <div key={projectItem.key}>
                                     <div className="flex justify-between">
@@ -90,11 +90,11 @@ const Print = ({ props }) => {
                                         </span>
                                     </div>
                                     <ul>
-                                        {projectResponsibilities.length != 0
+                                        {projects.responsibilities.length != 0
                                             ? projectItem.responsibilities.map(
                                                 (key) => {
                                                     const responsibility =
-                                                        projectResponsibilities.find(
+                                                        projects.responsibilities.find(
                                                             (r) =>
                                                                 r.key === key,
                                                         );

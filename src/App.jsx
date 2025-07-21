@@ -6,121 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { ProfileContextProvider } from './profile-context';
 import { EducationContextProvider } from './education-context';
+import { ProjectsContextProvider } from './projects-context';
 
 function App() {
-    const [projects, setProjects] = useState([]);
-    const [projectResponsibilities, setProjectResponsibilities] = useState([]);
     const [experiences, setExperiences] = useState([]);
     const [experienceResponsibilities, setExperienceResponsibilities] =
         useState([]);
     const [skills, setSkills] = useState([]);
-
-    // PROJECTS
-    const handleProjectsOnChange = (e, name, itemKey) => {
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === itemKey) {
-                    return {
-                        ...proj,
-                        [name]: e.target.value,
-                    };
-                }
-
-                return proj;
-            }),
-        );
-    };
-
-    const handleAddProjectClick = () => {
-        // The key for the first responsibility of this project
-        const firstResponsibilityKey = uuidv4();
-
-        setProjects([
-            ...projects,
-            {
-                key: uuidv4(),
-                name: '',
-                period: '',
-                responsibilities: [firstResponsibilityKey],
-            },
-        ]);
-
-        // Add in a first one automatically
-        setProjectResponsibilities([
-            ...projectResponsibilities,
-            {
-                key: firstResponsibilityKey,
-                description: '',
-            },
-        ]);
-    };
-
-    const handleRemoveProjectClick = (key) => {
-        setProjects(projects.filter((projItem) => projItem.key !== key));
-    };
-
-    const handleAddProjectResponsibilityClick = (itemKey) => {
-        const newResponsibilityKey = uuidv4();
-
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === itemKey) {
-                    return {
-                        ...proj,
-                        responsibilities: [
-                            ...proj.responsibilities,
-                            newResponsibilityKey,
-                        ],
-                    };
-                }
-                return proj;
-            }),
-        );
-
-        setProjectResponsibilities([
-            ...projectResponsibilities,
-            {
-                key: newResponsibilityKey,
-                description: '',
-            },
-        ]);
-    };
-
-    const handleProjectResponsibilitiesOnChange = (e, name, itemKey) => {
-        setProjectResponsibilities(
-            projectResponsibilities.map((pr) => {
-                if (pr.key === itemKey) {
-                    return {
-                        ...pr,
-                        [name]: e.target.value,
-                    };
-                }
-
-                return pr;
-            }),
-        );
-    };
-
-    const handleRemoveProjectResponsibilityClick = (projectKey, itemKey) => {
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === projectKey) {
-                    return {
-                        ...proj,
-                        responsibilities: proj.responsibilities.filter(
-                            (item) => item !== itemKey,
-                        ),
-                    };
-                }
-
-                return proj;
-            }),
-        );
-
-        setProjectResponsibilities(
-            projectResponsibilities.filter((item) => item.key !== itemKey),
-        );
-    };
 
     // EXPERIENCES
     const handleAddExperienceClick = () => {
@@ -264,19 +156,10 @@ function App() {
 
     const props = {
         states: {
-            projects,
-            projectResponsibilities,
             experiences,
             experienceResponsibilities,
             skills,
         },
-        // Projects
-        handleProjectsOnChange,
-        handleAddProjectClick,
-        handleRemoveProjectClick,
-        handleAddProjectResponsibilityClick,
-        handleRemoveProjectResponsibilityClick,
-        handleProjectResponsibilitiesOnChange,
         // Experience
         handleExperiencesOnChange,
         handleAddExperienceClick,
@@ -293,10 +176,12 @@ function App() {
     return (
         <ProfileContextProvider>
             <EducationContextProvider>
-                <div className="flex flex-wrap justify-center gap-8 p-8">
-                    <Form props={props} />
-                    <Print props={props.states} />
-                </div>
+                <ProjectsContextProvider>
+                    <div className="flex flex-wrap justify-center gap-8 p-8">
+                        <Form props={props} />
+                        <Print props={props.states} />
+                    </div>
+                </ProjectsContextProvider>
             </EducationContextProvider>
         </ProfileContextProvider>
     );

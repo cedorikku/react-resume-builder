@@ -5,19 +5,15 @@ import { FormSection } from './components/layouts/FormSection';
 import { useContext } from 'react';
 import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
+import { ProjectsContext } from './projects-context';
 
 const Form = ({ props }) => {
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
+    const projects = useContext(ProjectsContext);
 
     const {
-        states: { projects, experiences, skills },
-        handleProjectsOnChange,
-        handleAddProjectClick,
-        handleRemoveProjectClick,
-        handleProjectResponsibilitiesOnChange,
-        handleAddProjectResponsibilityClick,
-        handleRemoveProjectResponsibilityClick,
+        states: { experiences, skills },
         handleExperiencesOnChange,
         handleAddExperienceClick,
         handleRemoveExperienceClick,
@@ -143,14 +139,14 @@ const Form = ({ props }) => {
             </FormSection>
 
             <FormSection name="Projects">
-                {projects.map((projectItem) => {
+                {projects.items.map((projectItem) => {
                     return (
                         <div key={projectItem.key} className="input-group">
                             <Input
                                 label="Name"
                                 value={projectItem.name || ''}
                                 onChange={(e) =>
-                                    handleProjectsOnChange(
+                                    projects.handleProjectsOnChange(
                                         e,
                                         'name',
                                         projectItem.key,
@@ -162,7 +158,7 @@ const Form = ({ props }) => {
                                 label="Period"
                                 value={projectItem.period || ''}
                                 onChange={(e) =>
-                                    handleProjectsOnChange(
+                                    projects.handleProjectsOnChange(
                                         e,
                                         'period',
                                         projectItem.key,
@@ -177,7 +173,7 @@ const Form = ({ props }) => {
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        handleAddProjectResponsibilityClick(
+                                        projects.handleAddProjectResponsibilityClick(
                                             projectItem.key,
                                         )
                                     }
@@ -195,7 +191,7 @@ const Form = ({ props }) => {
                                                     <Input
                                                         placeholder={++index}
                                                         onChange={(e) =>
-                                                            handleProjectResponsibilitiesOnChange(
+                                                            projects.handleProjectResponsibilitiesOnChange(
                                                                 e,
                                                                 'description',
                                                                 responsibilityKey,
@@ -206,7 +202,7 @@ const Form = ({ props }) => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                handleRemoveProjectResponsibilityClick(
+                                                                projects.handleRemoveProjectResponsibilityClick(
                                                                     projectItem.key,
                                                                     responsibilityKey,
                                                                 )
@@ -225,7 +221,7 @@ const Form = ({ props }) => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    handleRemoveProjectClick(projectItem.key)
+                                    projects.handleRemoveProjectClick(projectItem.key)
                                 }
                             />
                         </div>
@@ -234,7 +230,7 @@ const Form = ({ props }) => {
 
                 <Button
                     text="Add Project"
-                    handleClick={handleAddProjectClick}
+                    handleClick={projects.handleAddProjectClick}
                 />
             </FormSection>
 
