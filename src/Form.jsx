@@ -1,22 +1,20 @@
 import './styles/Form.css';
+import { useContext } from 'react';
 import Input from './components/Input';
 import Button, { ButtonRed } from './components/Button';
 import { FormSection } from './components/layouts/FormSection';
-import { useContext } from 'react';
-import { ProfileContext } from './profile-context';
-import { EducationContext } from './education-context';
-import { ProjectsContext } from './projects-context';
-import { ExperiencesContext } from './experiences-context';
-import { SkillsContext } from './skills-context';
+import { ProfileContext } from './contexts/profile-context';
+import { EducationContext } from './contexts/education-context';
+import { ProjectsContext } from './contexts/projects-context';
+import { ExperiencesContext } from './contexts/experiences-context';
+import { SkillsContext } from './contexts/skills-context';
 
-const Form = ({ props }) => {
+const Form = () => {
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
     const skills = useContext(SkillsContext);
-
-    const {} = props;
 
     return (
         <form className="form min-w-300 flex-none text-sm text-white">

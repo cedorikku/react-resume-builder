@@ -1,18 +1,13 @@
-import React, { useState } from 'react';
-
+import React from 'react';
 import Form from './Form';
 import Print from './Print';
-import { v4 as uuidv4 } from 'uuid';
-
-import { ProfileContextProvider } from './profile-context';
-import { EducationContextProvider } from './education-context';
-import { ProjectsContextProvider } from './projects-context';
-import { ExperiencesContextProvider } from './experiences-context';
-import { SkillsContextProvider } from './skills-context';
+import { ProfileContextProvider } from './contexts/profile-context';
+import { EducationContextProvider } from './contexts/education-context';
+import { ProjectsContextProvider } from './contexts/projects-context';
+import { ExperiencesContextProvider } from './contexts/experiences-context';
+import { SkillsContextProvider } from './contexts/skills-context';
 
 function App() {
-    const props = {};
-
     return (
         <ProfileContextProvider>
             <EducationContextProvider>
@@ -20,8 +15,8 @@ function App() {
                     <ExperiencesContextProvider>
                         <SkillsContextProvider>
                             <div className="flex flex-wrap justify-center gap-8 p-8">
-                                <Form props={props} />
-                                <Print props={props.states} />
+                                <Form />
+                                <Print />
                             </div>
                         </SkillsContextProvider>
                     </ExperiencesContextProvider>

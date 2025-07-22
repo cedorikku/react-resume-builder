@@ -1,13 +1,13 @@
 import './styles/Print.css';
-import { PrintSection } from './components/layouts/PrintSection';
-import { ProfileContext } from './profile-context';
-import { EducationContext } from './education-context';
-import { ProjectsContext } from './projects-context';
-import { ExperiencesContext } from './experiences-context';
-import { SkillsContext } from './skills-context';
 import { useContext } from 'react';
+import { PrintSection } from './components/layouts/PrintSection';
+import { ProfileContext } from './contexts/profile-context';
+import { EducationContext } from './contexts/education-context';
+import { ProjectsContext } from './contexts/projects-context';
+import { ExperiencesContext } from './contexts/experiences-context';
+import { SkillsContext } from './contexts/skills-context';
 
-const Print = ({ props }) => {
+const Print = () => {
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
