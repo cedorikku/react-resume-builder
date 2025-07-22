@@ -6,20 +6,16 @@ import { useContext } from 'react';
 import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
 import { ProjectsContext } from './projects-context';
+import { ExperiencesContext } from './experiences-context';
 
 const Form = ({ props }) => {
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
+    const experiences = useContext(ExperiencesContext);
 
     const {
-        states: { experiences, skills },
-        handleExperiencesOnChange,
-        handleAddExperienceClick,
-        handleRemoveExperienceClick,
-        handleAddExperienceResponsibilityClick,
-        handleRemoveExperienceResponsibilityClick,
-        handleExperienceResponsibilitiesOnChange,
+        states: { skills },
         handleSkillsOnChange,
         handleAddSkills,
         handleRemoveSkills,
@@ -235,14 +231,14 @@ const Form = ({ props }) => {
             </FormSection>
 
             <FormSection name="Experience">
-                {experiences.map((expItem) => {
+                {experiences.items.map((expItem) => {
                     return (
                         <div key={expItem.key} className="input-group">
                             <Input
                                 label="Position"
                                 value={expItem.position || ''}
                                 onChange={(e) =>
-                                    handleExperiencesOnChange(
+                                    experiences.handleExperiencesOnChange(
                                         e,
                                         'position',
                                         expItem.key,
@@ -254,7 +250,7 @@ const Form = ({ props }) => {
                                 label="Company"
                                 value={expItem.company || ''}
                                 onChange={(e) =>
-                                    handleExperiencesOnChange(
+                                    experiences.handleExperiencesOnChange(
                                         e,
                                         'company',
                                         expItem.key,
@@ -266,7 +262,7 @@ const Form = ({ props }) => {
                                     label="Period"
                                     value={expItem.period || ''}
                                     onChange={(e) =>
-                                        handleExperiencesOnChange(
+                                        experiences.handleExperiencesOnChange(
                                             e,
                                             'period',
                                             expItem.key,
@@ -277,7 +273,7 @@ const Form = ({ props }) => {
                                     label="Place"
                                     value={expItem.place || ''}
                                     onChange={(e) =>
-                                        handleExperiencesOnChange(
+                                        experiences.handleExperiencesOnChange(
                                             e,
                                             'place',
                                             expItem.key,
@@ -292,7 +288,7 @@ const Form = ({ props }) => {
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        handleAddExperienceResponsibilityClick(
+                                        experiences.handleAddExperienceResponsibilityClick(
                                             expItem.key,
                                         )
                                     }
@@ -310,7 +306,7 @@ const Form = ({ props }) => {
                                                     <Input
                                                         placeholder={++index}
                                                         onChange={(e) =>
-                                                            handleExperienceResponsibilitiesOnChange(
+                                                            experiences.handleExperienceResponsibilitiesOnChange(
                                                                 e,
                                                                 'description',
                                                                 responsibilityKey,
@@ -321,7 +317,7 @@ const Form = ({ props }) => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                handleRemoveExperienceResponsibilityClick(
+                                                                experiences.handleRemoveExperienceResponsibilityClick(
                                                                     expItem.key,
                                                                     responsibilityKey,
                                                                 )
@@ -339,7 +335,7 @@ const Form = ({ props }) => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    handleRemoveExperienceClick(expItem.key)
+                                    experiences.handleRemoveExperienceClick(expItem.key)
                                 }
                             />
                         </div>
@@ -348,7 +344,7 @@ const Form = ({ props }) => {
 
                 <Button
                     text="Add Experience"
-                    handleClick={handleAddExperienceClick}
+                    handleClick={experiences.handleAddExperienceClick}
                 />
             </FormSection>
 

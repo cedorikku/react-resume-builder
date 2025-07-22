@@ -3,18 +3,18 @@ import { PrintSection } from './components/layouts/PrintSection';
 import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
 import { ProjectsContext } from './projects-context';
+import { ExperiencesContext } from './experiences-context';
 import { useContext } from 'react';
 
 const Print = ({ props }) => {
     const {
-        experiences,
-        experienceResponsibilities,
         skills,
     } = props;
 
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
+    const experiences = useContext(ExperiencesContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -116,9 +116,9 @@ const Print = ({ props }) => {
                     ''
                 )}
 
-                {experiences.length != 0 ? (
-                    <PrintSection name="Experience">
-                        {experiences.map((expItem) => {
+                {experiences.items.length != 0 ? (
+                    <PrintSection name="Experiences">
+                        {experiences.items.map((expItem) => {
                             return (
                                 <div key={expItem.key} className="exp-item">
                                     <div className="flex justify-between">
@@ -138,11 +138,11 @@ const Print = ({ props }) => {
                                         </span>
                                     </div>
                                     <ul>
-                                        {experienceResponsibilities.length != 0
+                                        {experiences.responsibilities.length != 0
                                             ? expItem.responsibilities.map(
                                                 (key) => {
                                                     const responsibility =
-                                                        experienceResponsibilities.find(
+                                                        experiences.responsibilities.find(
                                                             (r) =>
                                                                 r.key === key,
                                                         );
