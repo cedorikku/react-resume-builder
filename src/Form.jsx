@@ -7,18 +7,16 @@ import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
 import { ProjectsContext } from './projects-context';
 import { ExperiencesContext } from './experiences-context';
+import { SkillsContext } from './skills-context';
 
 const Form = ({ props }) => {
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
+    const skills = useContext(SkillsContext);
 
     const {
-        states: { skills },
-        handleSkillsOnChange,
-        handleAddSkills,
-        handleRemoveSkills,
     } = props;
 
     return (
@@ -350,14 +348,14 @@ const Form = ({ props }) => {
 
             {/* skills with category bullet point section */}
             <FormSection name="Skills">
-                {skills.map((skillItem) => (
+                {skills.items.map((skillItem) => (
                     <div key={skillItem.key} className="input-group">
                         <div className="two-col short-long">
                             <Input
                                 label="Category"
                                 value={skillItem.category || ''}
                                 onChange={(e) =>
-                                    handleSkillsOnChange(
+                                    skills.handleSkillsOnChange(
                                         e,
                                         'category',
                                         skillItem.key,
@@ -368,7 +366,7 @@ const Form = ({ props }) => {
                                 label="List of skills"
                                 value={skillItem.values || ''}
                                 onChange={(e) =>
-                                    handleSkillsOnChange(
+                                    skills.handleSkillsOnChange(
                                         e,
                                         'values',
                                         skillItem.key,
@@ -379,12 +377,12 @@ const Form = ({ props }) => {
                         <ButtonRed
                             text="Remove"
                             handleClick={() =>
-                                handleRemoveSkills(skillItem.key)
+                                skills.handleRemoveSkills(skillItem.key)
                             }
                         />
                     </div>
                 ))}
-                <Button text="Add Skill" handleClick={handleAddSkills} />
+                <Button text="Add Skill" handleClick={skills.handleAddSkills} />
             </FormSection>
         </form>
     );

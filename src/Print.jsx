@@ -4,17 +4,15 @@ import { ProfileContext } from './profile-context';
 import { EducationContext } from './education-context';
 import { ProjectsContext } from './projects-context';
 import { ExperiencesContext } from './experiences-context';
+import { SkillsContext } from './skills-context';
 import { useContext } from 'react';
 
 const Print = ({ props }) => {
-    const {
-        skills,
-    } = props;
-
     const profile = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
+    const skills = useContext(SkillsContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -164,10 +162,10 @@ const Print = ({ props }) => {
                     ''
                 )}
 
-                {skills.length != 0 ? (
+                {skills.items.length != 0 ? (
                     <PrintSection name="Skills">
                         <ul>
-                            {skills.map((skillItem) => {
+                            {skills.items.map((skillItem) => {
                                 return (
                                     <li
                                         key={skillItem.key}
