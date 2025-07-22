@@ -5,8 +5,7 @@ export const ExperiencesContext = createContext([]);
 
 export function ExperiencesContextProvider({ children }) {
     const [experiences, setExperiences] = useState([]);
-    const [responsibilities, setResponsibilities] =
-        useState([]);
+    const [responsibilities, setResponsibilities] = useState([]);
 
     const handleAddExperienceClick = () => {
         // The key for the first responsibility of this experience

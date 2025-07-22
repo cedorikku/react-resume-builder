@@ -16,8 +16,7 @@ const Form = ({ props }) => {
     const experiences = useContext(ExperiencesContext);
     const skills = useContext(SkillsContext);
 
-    const {
-    } = props;
+    const {} = props;
 
     return (
         <form className="form min-w-300 flex-none text-sm text-white">
@@ -27,26 +26,34 @@ const Form = ({ props }) => {
                         type="text"
                         label="Name"
                         value={profile.name || ''}
-                        onChange={(e) => profile.handleProfileOnChange(e, 'name')}
+                        onChange={(e) =>
+                            profile.handleProfileOnChange(e, 'name')
+                        }
                     />
                     <Input
                         type="text"
                         label="Address"
                         value={profile.address || ''}
-                        onChange={(e) => profile.handleProfileOnChange(e, 'address')}
+                        onChange={(e) =>
+                            profile.handleProfileOnChange(e, 'address')
+                        }
                     />
                     <div className="two-col">
                         <Input
                             type="email"
                             label="Email"
                             value={profile.email || ''}
-                            onChange={(e) => profile.handleProfileOnChange(e, 'email')}
+                            onChange={(e) =>
+                                profile.handleProfileOnChange(e, 'email')
+                            }
                         />
                         <Input
                             type="tel"
                             label="Phone"
                             value={profile.phone || ''}
-                            onChange={(e) => profile.handleProfileOnChange(e, 'phone')}
+                            onChange={(e) =>
+                                profile.handleProfileOnChange(e, 'phone')
+                            }
                         />
                     </div>
                 </div>
@@ -215,7 +222,9 @@ const Form = ({ props }) => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    projects.handleRemoveProjectClick(projectItem.key)
+                                    projects.handleRemoveProjectClick(
+                                        projectItem.key,
+                                    )
                                 }
                             />
                         </div>
@@ -333,7 +342,9 @@ const Form = ({ props }) => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    experiences.handleRemoveExperienceClick(expItem.key)
+                                    experiences.handleRemoveExperienceClick(
+                                        expItem.key,
+                                    )
                                 }
                             />
                         </div>
