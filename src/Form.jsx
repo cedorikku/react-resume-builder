@@ -293,7 +293,7 @@ const Form = () => {
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        experiences.handleAddExperienceResponsibilityClick(
+                                        experiences.handleAddResponsibilityClick(
                                             expItem.key,
                                         )
                                     }
@@ -311,7 +311,7 @@ const Form = () => {
                                                     <Input
                                                         placeholder={++index}
                                                         onChange={(e) =>
-                                                            experiences.handleExperienceResponsibilitiesOnChange(
+                                                            experiences.handleResponsibilitiesOnChange(
                                                                 e,
                                                                 'description',
                                                                 responsibilityKey,
@@ -322,7 +322,7 @@ const Form = () => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                experiences.handleRemoveExperienceResponsibilityClick(
+                                                                experiences.handleRemoveResponsibilityClick(
                                                                     expItem.key,
                                                                     responsibilityKey,
                                                                 )

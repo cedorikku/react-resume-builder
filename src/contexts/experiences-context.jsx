@@ -52,7 +52,7 @@ export function ExperiencesContextProvider({ children }) {
         setExperiences(experiences.filter((expItem) => expItem.key !== key));
     };
 
-    const handleAddExperienceResponsibilityClick = (itemKey) => {
+    const handleAddResponsibilityClick = (itemKey) => {
         const newResponsibilityKey = uuidv4();
 
         setExperiences(
@@ -80,7 +80,7 @@ export function ExperiencesContextProvider({ children }) {
         ]);
     };
 
-    const handleExperienceResponsibilitiesOnChange = (e, name, itemKey) => {
+    const handleResponsibilitiesOnChange = (e, name, itemKey) => {
         setResponsibilities(
             responsibilities.map((er) => {
                 if (er.key === itemKey) {
@@ -95,7 +95,7 @@ export function ExperiencesContextProvider({ children }) {
         );
     };
 
-    const handleRemoveExperienceResponsibilityClick = (expKey, itemKey) => {
+    const handleRemoveResponsibilityClick = (expKey, itemKey) => {
         setExperiences(
             experiences.map((exp) => {
                 if (exp.key === expKey) {
@@ -124,9 +124,9 @@ export function ExperiencesContextProvider({ children }) {
                 handleExperiencesOnChange,
                 handleAddExperienceClick,
                 handleRemoveExperienceClick,
-                handleAddExperienceResponsibilityClick,
-                handleRemoveExperienceResponsibilityClick,
-                handleExperienceResponsibilitiesOnChange,
+                handleAddResponsibilityClick,
+                handleRemoveResponsibilityClick,
+                handleResponsibilitiesOnChange,
             }}
         >
             {children}
