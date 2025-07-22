@@ -172,7 +172,7 @@ const Form = () => {
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        projects.handleAddProjectResponsibilityClick(
+                                        projects.handleAddDescriptionClick(
                                             projectItem.key,
                                         )
                                     }
@@ -190,7 +190,7 @@ const Form = () => {
                                                     <Input
                                                         placeholder={++index}
                                                         onChange={(e) =>
-                                                            projects.handleProjectResponsibilitiesOnChange(
+                                                            projects.handleDescriptionsOnChange(
                                                                 e,
                                                                 'description',
                                                                 responsibilityKey,
@@ -201,7 +201,7 @@ const Form = () => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                projects.handleRemoveProjectResponsibilityClick(
+                                                                projects.handleRemoveDescriptionClick(
                                                                     projectItem.key,
                                                                     responsibilityKey,
                                                                 )

@@ -5,7 +5,7 @@ export const ProjectsContext = createContext([]);
 
 export function ProjectsContextProvider({ children }) {
     const [projects, setProjects] = useState([]);
-    const [responsibilities, setResponsibilities] = useState([]);
+    const [descriptions, setDescriptions] = useState([]);
 
     const handleProjectsOnChange = (e, name, itemKey) => {
         setProjects(
@@ -37,8 +37,8 @@ export function ProjectsContextProvider({ children }) {
         ]);
 
         // Add in a first one automatically
-        setResponsibilities([
-            ...responsibilities,
+        setDescriptions([
+            ...descriptions,
             {
                 key: firstResponsibilityKey,
                 description: '',
@@ -50,7 +50,7 @@ export function ProjectsContextProvider({ children }) {
         setProjects(projects.filter((projItem) => projItem.key !== key));
     };
 
-    const handleAddProjectResponsibilityClick = (itemKey) => {
+    const handleAddDescriptionClick = (itemKey) => {
         const newResponsibilityKey = uuidv4();
 
         setProjects(
@@ -68,8 +68,8 @@ export function ProjectsContextProvider({ children }) {
             }),
         );
 
-        setResponsibilities([
-            ...responsibilities,
+        setDescriptions([
+            ...descriptions,
             {
                 key: newResponsibilityKey,
                 description: '',
@@ -77,9 +77,9 @@ export function ProjectsContextProvider({ children }) {
         ]);
     };
 
-    const handleProjectResponsibilitiesOnChange = (e, name, itemKey) => {
-        setResponsibilities(
-            responsibilities.map((pr) => {
+    const handleDescriptionsOnChange = (e, name, itemKey) => {
+        setDescriptions(
+            descriptions.map((pr) => {
                 if (pr.key === itemKey) {
                     return {
                         ...pr,
@@ -92,7 +92,7 @@ export function ProjectsContextProvider({ children }) {
         );
     };
 
-    const handleRemoveProjectResponsibilityClick = (projectKey, itemKey) => {
+    const handleRemoveDescriptionClick = (projectKey, itemKey) => {
         setProjects(
             projects.map((proj) => {
                 if (proj.key === projectKey) {
@@ -108,22 +108,20 @@ export function ProjectsContextProvider({ children }) {
             }),
         );
 
-        setResponsibilities(
-            responsibilities.filter((item) => item.key !== itemKey),
-        );
+        setDescriptions(descriptions.filter((item) => item.key !== itemKey));
     };
 
     return (
         <ProjectsContext.Provider
             value={{
                 items: projects,
-                responsibilities: responsibilities,
+                responsibilities: descriptions,
                 handleProjectsOnChange,
                 handleAddProjectClick,
                 handleRemoveProjectClick,
-                handleAddProjectResponsibilityClick,
-                handleProjectResponsibilitiesOnChange,
-                handleRemoveProjectResponsibilityClick,
+                handleAddDescriptionClick,
+                handleDescriptionsOnChange,
+                handleRemoveDescriptionClick,
             }}
         >
             {children}
