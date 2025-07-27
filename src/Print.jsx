@@ -24,7 +24,7 @@ const Print = () => {
             </div>
             <div className="flex justify-center gap-2">
                 <span>{profile.email || '[youraddress@email.com]'}</span>
-                <span>|</span>
+                {' • '}
                 <span>{profile.phone || '[xxxxxxxxxxx]'}</span>
             </div>
 
