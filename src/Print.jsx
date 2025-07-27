@@ -28,36 +28,45 @@ const Print = () => {
                 <span>{profile.phone || '[xxxxxxxxxxx]'}</span>
             </div>
 
-            {education.items.length != 0 ? (
-                <PrintSection name="Education">
-                    {education.items.map((educationItem) => {
+            {experiences.items.length != 0 ? (
+                <PrintSection name="Experiences">
+                    {experiences.items.map((expItem) => {
                         return (
-                            <div key={educationItem.key} className="edu-item">
+                            <div key={expItem.key} className="exp-item">
                                 <div className="flex justify-between">
-                                    <div className="font-bold">
-                                        {educationItem.school ||
-                                            '[Your School Name]'}
-                                    </div>
-                                    <div>
-                                        {educationItem.location ||
-                                            '[City, State]'}
-                                    </div>
+                                    <span className="font-bold">
+                                        {expItem.position || '[Position]'}
+                                    </span>
+                                    <span>
+                                        {expItem.period || '[From - To]'}
+                                    </span>
                                 </div>
                                 <div className="flex justify-between">
-                                    <div className="italic">
-                                        {educationItem.degree ||
-                                            '[Your Degree]'}
-                                    </div>
-                                    <div className="flex gap-2 italic">
-                                        <span>
-                                            {educationItem.from || '[From]'}
-                                        </span>
-                                        <span>-</span>
-                                        <span>
-                                            {educationItem.to || '[To]'}
-                                        </span>
-                                    </div>
+                                    <span className="italic">
+                                        {expItem.company || '[Company]'}
+                                    </span>
+                                    <span className="italic">
+                                        {expItem.place || '[City, State]'}
+                                    </span>
                                 </div>
+                                <ul>
+                                    {experiences.responsibilities.length != 0
+                                        ? expItem.responsibilities.map(
+                                              (key) => {
+                                                  const responsibility =
+                                                      experiences.responsibilities.find(
+                                                          (r) => r.key === key,
+                                                      );
+                                                  return (
+                                                      <li key={key}>
+                                                          {responsibility.description ||
+                                                              '[A Description about this job]'}
+                                                      </li>
+                                                  );
+                                              },
+                                          )
+                                        : ''}
+                                </ul>
                             </div>
                         );
                     })}
@@ -105,45 +114,36 @@ const Print = () => {
                 ''
             )}
 
-            {experiences.items.length != 0 ? (
-                <PrintSection name="Experiences">
-                    {experiences.items.map((expItem) => {
+            {education.items.length != 0 ? (
+                <PrintSection name="Education">
+                    {education.items.map((educationItem) => {
                         return (
-                            <div key={expItem.key} className="exp-item">
+                            <div key={educationItem.key} className="edu-item">
                                 <div className="flex justify-between">
-                                    <span className="font-bold">
-                                        {expItem.position || '[Position]'}
-                                    </span>
-                                    <span>
-                                        {expItem.period || '[From - To]'}
-                                    </span>
+                                    <div className="font-bold">
+                                        {educationItem.school ||
+                                            '[Your School Name]'}
+                                    </div>
+                                    <div>
+                                        {educationItem.location ||
+                                            '[City, State]'}
+                                    </div>
                                 </div>
                                 <div className="flex justify-between">
-                                    <span className="italic">
-                                        {expItem.company || '[Company]'}
-                                    </span>
-                                    <span className="italic">
-                                        {expItem.place || '[City, State]'}
-                                    </span>
+                                    <div className="italic">
+                                        {educationItem.degree ||
+                                            '[Your Degree]'}
+                                    </div>
+                                    <div className="flex gap-2 italic">
+                                        <span>
+                                            {educationItem.from || '[From]'}
+                                        </span>
+                                        <span>-</span>
+                                        <span>
+                                            {educationItem.to || '[To]'}
+                                        </span>
+                                    </div>
                                 </div>
-                                <ul>
-                                    {experiences.responsibilities.length != 0
-                                        ? expItem.responsibilities.map(
-                                              (key) => {
-                                                  const responsibility =
-                                                      experiences.responsibilities.find(
-                                                          (r) => r.key === key,
-                                                      );
-                                                  return (
-                                                      <li key={key}>
-                                                          {responsibility.description ||
-                                                              '[A Description about this job]'}
-                                                      </li>
-                                                  );
-                                              },
-                                          )
-                                        : ''}
-                                </ul>
                             </div>
                         );
                     })}

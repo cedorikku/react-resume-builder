@@ -57,6 +57,126 @@ const Form = () => {
                 </div>
             </FormSection>
 
+            <FormSection name="Experience">
+                {experiences.items.map((expItem) => {
+                    return (
+                        <div key={expItem.key} className="input-group">
+                            <Input
+                                label="Position"
+                                value={expItem.position || ''}
+                                onChange={(e) =>
+                                    experiences.handleExperiencesOnChange(
+                                        e,
+                                        'position',
+                                        expItem.key,
+                                    )
+                                }
+                            />
+
+                            <Input
+                                label="Company"
+                                value={expItem.company || ''}
+                                onChange={(e) =>
+                                    experiences.handleExperiencesOnChange(
+                                        e,
+                                        'company',
+                                        expItem.key,
+                                    )
+                                }
+                            />
+                            <div className="two-col">
+                                <Input
+                                    label="Period"
+                                    value={expItem.period || ''}
+                                    onChange={(e) =>
+                                        experiences.handleExperiencesOnChange(
+                                            e,
+                                            'period',
+                                            expItem.key,
+                                        )
+                                    }
+                                />
+                                <Input
+                                    label="Place"
+                                    value={expItem.place || ''}
+                                    onChange={(e) =>
+                                        experiences.handleExperiencesOnChange(
+                                            e,
+                                            'place',
+                                            expItem.key,
+                                        )
+                                    }
+                                />
+                            </div>
+                            <div className="flex items-center gap-8">
+                                <label className="text-sm font-medium">
+                                    Responsibilities
+                                </label>
+                                <Button
+                                    text="+"
+                                    handleClick={() =>
+                                        experiences.handleAddResponsibilityClick(
+                                            expItem.key,
+                                        )
+                                    }
+                                />
+                            </div>
+                            {expItem.responsibilities.length != 0 ? (
+                                <ul className="flex flex-col justify-center gap-4">
+                                    {expItem.responsibilities.map(
+                                        (responsibilityKey, index) => {
+                                            return (
+                                                <li
+                                                    key={responsibilityKey}
+                                                    className="flex gap-4"
+                                                >
+                                                    <Input
+                                                        placeholder={++index}
+                                                        onChange={(e) =>
+                                                            experiences.handleResponsibilitiesOnChange(
+                                                                e,
+                                                                'description',
+                                                                responsibilityKey,
+                                                            )
+                                                        }
+                                                    />
+                                                    <div className="flex basis-20">
+                                                        <ButtonRed
+                                                            text="-"
+                                                            handleClick={() =>
+                                                                experiences.handleRemoveResponsibilityClick(
+                                                                    expItem.key,
+                                                                    responsibilityKey,
+                                                                )
+                                                            }
+                                                        />
+                                                    </div>
+                                                </li>
+                                            );
+                                        },
+                                    )}
+                                </ul>
+                            ) : (
+                                ''
+                            )}
+                            <ButtonRed
+                                text="Remove"
+                                handleClick={() =>
+                                    experiences.handleRemoveExperienceClick(
+                                        expItem.key,
+                                    )
+                                }
+                            />
+                        </div>
+                    );
+                })}
+
+                <Button
+                    text="Add Experience"
+                    handleClick={experiences.handleAddExperienceClick}
+                />
+            </FormSection>
+
             <FormSection name="Education">
                 {education.items.map((educationItem) => {
                     return (
@@ -232,126 +352,6 @@ const Form = () => {
                 <Button
                     text="Add Project"
                     handleClick={projects.handleAddProjectClick}
-                />
-            </FormSection>
-
-            <FormSection name="Experience">
-                {experiences.items.map((expItem) => {
-                    return (
-                        <div key={expItem.key} className="input-group">
-                            <Input
-                                label="Position"
-                                value={expItem.position || ''}
-                                onChange={(e) =>
-                                    experiences.handleExperiencesOnChange(
-                                        e,
-                                        'position',
-                                        expItem.key,
-                                    )
-                                }
-                            />
-
-                            <Input
-                                label="Company"
-                                value={expItem.company || ''}
-                                onChange={(e) =>
-                                    experiences.handleExperiencesOnChange(
-                                        e,
-                                        'company',
-                                        expItem.key,
-                                    )
-                                }
-                            />
-                            <div className="two-col">
-                                <Input
-                                    label="Period"
-                                    value={expItem.period || ''}
-                                    onChange={(e) =>
-                                        experiences.handleExperiencesOnChange(
-                                            e,
-                                            'period',
-                                            expItem.key,
-                                        )
-                                    }
-                                />
-                                <Input
-                                    label="Place"
-                                    value={expItem.place || ''}
-                                    onChange={(e) =>
-                                        experiences.handleExperiencesOnChange(
-                                            e,
-                                            'place',
-                                            expItem.key,
-                                        )
-                                    }
-                                />
-                            </div>
-                            <div className="flex items-center gap-8">
-                                <label className="text-sm font-medium">
-                                    Responsibilities
-                                </label>
-                                <Button
-                                    text="+"
-                                    handleClick={() =>
-                                        experiences.handleAddResponsibilityClick(
-                                            expItem.key,
-                                        )
-                                    }
-                                />
-                            </div>
-                            {expItem.responsibilities.length != 0 ? (
-                                <ul className="flex flex-col justify-center gap-4">
-                                    {expItem.responsibilities.map(
-                                        (responsibilityKey, index) => {
-                                            return (
-                                                <li
-                                                    key={responsibilityKey}
-                                                    className="flex gap-4"
-                                                >
-                                                    <Input
-                                                        placeholder={++index}
-                                                        onChange={(e) =>
-                                                            experiences.handleResponsibilitiesOnChange(
-                                                                e,
-                                                                'description',
-                                                                responsibilityKey,
-                                                            )
-                                                        }
-                                                    />
-                                                    <div className="flex basis-20">
-                                                        <ButtonRed
-                                                            text="-"
-                                                            handleClick={() =>
-                                                                experiences.handleRemoveResponsibilityClick(
-                                                                    expItem.key,
-                                                                    responsibilityKey,
-                                                                )
-                                                            }
-                                                        />
-                                                    </div>
-                                                </li>
-                                            );
-                                        },
-                                    )}
-                                </ul>
-                            ) : (
-                                ''
-                            )}
-                            <ButtonRed
-                                text="Remove"
-                                handleClick={() =>
-                                    experiences.handleRemoveExperienceClick(
-                                        expItem.key,
-                                    )
-                                }
-                            />
-                        </div>
-                    );
-                })}
-
-                <Button
-                    text="Add Experience"
-                    handleClick={experiences.handleAddExperienceClick}
                 />
             </FormSection>
 
