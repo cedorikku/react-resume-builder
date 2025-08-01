@@ -194,7 +194,7 @@ const Form = () => {
                             />
                             <Input
                                 label="Location"
-                                value={educationItem.degree || ''}
+                                value={educationItem.location || ''}
                                 onChange={(e) =>
                                     education.handleEducationOnChange(
                                         e,
