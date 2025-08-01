@@ -11,9 +11,9 @@ import { SkillsContext } from './contexts/skills-context';
 
 const Form = () => {
     const { profile, handleProfileOnChange } = useContext(ProfileContext);
-    const education = useContext(EducationContext);
-    const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
+    const projects = useContext(ProjectsContext);
+    const { education, educationHandlers } = useContext(EducationContext);
     const skills = useContext(SkillsContext);
 
     return (
@@ -24,34 +24,26 @@ const Form = () => {
                         type="text"
                         label="Name"
                         value={profile.name || ''}
-                        onChange={(e) =>
-                            handleProfileOnChange(e, 'name')
-                        }
+                        onChange={(e) => handleProfileOnChange(e, 'name')}
                     />
                     <Input
                         type="text"
                         label="Address"
                         value={profile.address || ''}
-                        onChange={(e) =>
-                            handleProfileOnChange(e, 'address')
-                        }
+                        onChange={(e) => handleProfileOnChange(e, 'address')}
                     />
                     <div className="two-col">
                         <Input
                             type="email"
                             label="Email"
                             value={profile.email || ''}
-                            onChange={(e) =>
-                                handleProfileOnChange(e, 'email')
-                            }
+                            onChange={(e) => handleProfileOnChange(e, 'email')}
                         />
                         <Input
                             type="tel"
                             label="Phone"
                             value={profile.phone || ''}
-                            onChange={(e) =>
-                                handleProfileOnChange(e, 'phone')
-                            }
+                            onChange={(e) => handleProfileOnChange(e, 'phone')}
                         />
                     </div>
                 </div>
@@ -177,86 +169,6 @@ const Form = () => {
                 />
             </FormSection>
 
-            <FormSection name="Education">
-                {education.items.map((educationItem) => {
-                    return (
-                        <div key={educationItem.key} className="input-group">
-                            <Input
-                                label="School"
-                                value={educationItem.school || ''}
-                                onChange={(e) =>
-                                    education.handleEducationOnChange(
-                                        e,
-                                        'school',
-                                        educationItem.key,
-                                    )
-                                }
-                            />
-                            <Input
-                                label="Location"
-                                value={educationItem.location || ''}
-                                onChange={(e) =>
-                                    education.handleEducationOnChange(
-                                        e,
-                                        'location',
-                                        educationItem.key,
-                                    )
-                                }
-                            />
-                            <Input
-                                label="Degree"
-                                value={educationItem.degree || ''}
-                                onChange={(e) =>
-                                    education.handleEducationOnChange(
-                                        e,
-                                        'degree',
-                                        educationItem.key,
-                                    )
-                                }
-                            />
-
-                            <div className="two-col">
-                                <Input
-                                    label="From"
-                                    value={educationItem.from || ''}
-                                    onChange={(e) =>
-                                        education.handleEducationOnChange(
-                                            e,
-                                            'from',
-                                            educationItem.key,
-                                        )
-                                    }
-                                />
-                                <Input
-                                    label="To"
-                                    value={educationItem.to || ''}
-                                    onChange={(e) =>
-                                        education.handleEducationOnChange(
-                                            e,
-                                            'to',
-                                            educationItem.key,
-                                        )
-                                    }
-                                />
-                            </div>
-
-                            <ButtonRed
-                                text="Remove"
-                                handleClick={() =>
-                                    education.handleRemoveEducationClick(
-                                        educationItem.key,
-                                    )
-                                }
-                            />
-                        </div>
-                    );
-                })}
-                <Button
-                    text="Add Education"
-                    handleClick={education.handleAddEducationClick}
-                />
-            </FormSection>
-
             <FormSection name="Projects">
                 {projects.items.map((projectItem) => {
                     return (
@@ -352,6 +264,86 @@ const Form = () => {
                 <Button
                     text="Add Project"
                     handleClick={projects.handleAddProjectClick}
+                />
+            </FormSection>
+
+            <FormSection name="Education">
+                {education.map((educationItem) => {
+                    return (
+                        <div key={educationItem.key} className="input-group">
+                            <Input
+                                label="School"
+                                value={educationItem.school || ''}
+                                onChange={(e) =>
+                                    educationHandlers.onChange(
+                                        e.target.value,
+                                        'school',
+                                        educationItem.key,
+                                    )
+                                }
+                            />
+                            <Input
+                                label="Location"
+                                value={educationItem.location || ''}
+                                onChange={(e) =>
+                                    educationHandlers.onChange(
+                                        e.target.value,
+                                        'location',
+                                        educationItem.key,
+                                    )
+                                }
+                            />
+                            <Input
+                                label="Degree"
+                                value={educationItem.degree || ''}
+                                onChange={(e) =>
+                                    educationHandlers.onChange(
+                                        e.target.value,
+                                        'degree',
+                                        educationItem.key,
+                                    )
+                                }
+                            />
+
+                            <div className="two-col">
+                                <Input
+                                    label="From"
+                                    value={educationItem.from || ''}
+                                    onChange={(e) =>
+                                        educationHandlers.onChange(
+                                            e.target.value,
+                                            'from',
+                                            educationItem.key,
+                                        )
+                                    }
+                                />
+                                <Input
+                                    label="To"
+                                    value={educationItem.to || ''}
+                                    onChange={(e) =>
+                                        educationHandlers.onChange(
+                                            e.target.value,
+                                            'to',
+                                            educationItem.key,
+                                        )
+                                    }
+                                />
+                            </div>
+
+                            <ButtonRed
+                                text="Remove"
+                                handleClick={() =>
+                                    educationHandlers.remove(
+                                        educationItem.key,
+                                    )
+                                }
+                            />
+                        </div>
+                    );
+                })}
+                <Button
+                    text="Add Education"
+                    handleClick={educationHandlers.add}
                 />
             </FormSection>
 

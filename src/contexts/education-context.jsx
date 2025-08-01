@@ -1,10 +1,20 @@
-import { useState, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const EducationContext = createContext([]);
 
 export function EducationContextProvider({ children }) {
-    const [education, setEducation] = useState([]);
+    const _stateVersion = 'v1';
+    const localStateKey = `educationData-${_stateVersion}`;
+
+    const [education, setEducation] = useState(() => {
+        const savedData = localStorage.getItem(localStateKey);
+        return savedData ? JSON.parse(savedData) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem(localStateKey, JSON.stringify(education));
+    }, [education]);
 
     const handleAddEducationClick = () => {
         setEducation([
@@ -20,13 +30,13 @@ export function EducationContextProvider({ children }) {
         ]);
     };
 
-    const handleEducationOnChange = (e, name, itemKey) => {
+    const handleEducationOnChange = (newValue, propName, itemKey) => {
         setEducation(
             education.map((edu) => {
                 if (edu.key === itemKey) {
                     return {
                         ...edu,
-                        [name]: e.target.value,
+                        [propName]: newValue,
                     };
                 }
 
@@ -42,10 +52,12 @@ export function EducationContextProvider({ children }) {
     return (
         <EducationContext.Provider
             value={{
-                items: education,
-                handleAddEducationClick,
-                handleEducationOnChange,
-                handleRemoveEducationClick,
+                education,
+                educationHandlers: {
+                    add: handleAddEducationClick,
+                    onChange: handleEducationOnChange,
+                    remove: handleRemoveEducationClick,
+                },
             }}
         >
             {children}

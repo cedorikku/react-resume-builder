@@ -9,9 +9,9 @@ import { SkillsContext } from './contexts/skills-context';
 
 const Print = () => {
     const { profile } = useContext(ProfileContext);
-    const education = useContext(EducationContext);
-    const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
+    const projects = useContext(ProjectsContext);
+    const { education } = useContext(EducationContext);
     const skills = useContext(SkillsContext);
 
     return (
@@ -114,9 +114,9 @@ const Print = () => {
                 ''
             )}
 
-            {education.items.length != 0 ? (
+            {education.length != 0 ? (
                 <PrintSection name="Education">
-                    {education.items.map((educationItem) => {
+                    {education.map((educationItem) => {
                         return (
                             <div key={educationItem.key} className="edu-item">
                                 <div className="flex justify-between">
