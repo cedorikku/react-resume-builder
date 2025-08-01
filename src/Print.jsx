@@ -8,7 +8,7 @@ import { ExperiencesContext } from './contexts/experiences-context';
 import { SkillsContext } from './contexts/skills-context';
 
 const Print = () => {
-    const profile = useContext(ProfileContext);
+    const { profile } = useContext(ProfileContext);
     const education = useContext(EducationContext);
     const projects = useContext(ProjectsContext);
     const experiences = useContext(ExperiencesContext);
