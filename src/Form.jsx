@@ -11,7 +11,7 @@ import { SkillsContext } from './contexts/skills-context';
 
 const Form = () => {
     const { profile, handleProfileOnChange } = useContext(ProfileContext);
-    const experiences = useContext(ExperiencesContext);
+    const { experiences, experienceHandlers } = useContext(ExperiencesContext);
     const projects = useContext(ProjectsContext);
     const { education, educationHandlers } = useContext(EducationContext);
     const skills = useContext(SkillsContext);
@@ -50,27 +50,26 @@ const Form = () => {
             </FormSection>
 
             <FormSection name="Experience">
-                {experiences.items.map((expItem) => {
+                {experiences.map((expItem) => {
                     return (
                         <div key={expItem.key} className="input-group">
                             <Input
                                 label="Position"
                                 value={expItem.position || ''}
                                 onChange={(e) =>
-                                    experiences.handleExperiencesOnChange(
-                                        e,
+                                    experienceHandlers.onChange(
+                                        e.target.value,
                                         'position',
                                         expItem.key,
                                     )
                                 }
                             />
-
                             <Input
                                 label="Company"
                                 value={expItem.company || ''}
                                 onChange={(e) =>
-                                    experiences.handleExperiencesOnChange(
-                                        e,
+                                    experienceHandlers.onChange(
+                                        e.target.value,
                                         'company',
                                         expItem.key,
                                     )
@@ -81,8 +80,8 @@ const Form = () => {
                                     label="Period"
                                     value={expItem.period || ''}
                                     onChange={(e) =>
-                                        experiences.handleExperiencesOnChange(
-                                            e,
+                                        experienceHandlers.onChange(
+                                            e.target.value,
                                             'period',
                                             expItem.key,
                                         )
@@ -92,8 +91,8 @@ const Form = () => {
                                     label="Place"
                                     value={expItem.place || ''}
                                     onChange={(e) =>
-                                        experiences.handleExperiencesOnChange(
-                                            e,
+                                        experienceHandlers.onChange(
+                                            e.target.value,
                                             'place',
                                             expItem.key,
                                         )
@@ -107,28 +106,29 @@ const Form = () => {
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        experiences.handleAddResponsibilityClick(
+                                        experienceHandlers.addResponsibility(
                                             expItem.key,
                                         )
                                     }
                                 />
                             </div>
-                            {expItem.responsibilities.length != 0 ? (
+                            {expItem.responsibilities.length !== 0 ? (
                                 <ul className="flex flex-col justify-center gap-4">
                                     {expItem.responsibilities.map(
-                                        (responsibilityKey, index) => {
+                                        (r, index) => {
                                             return (
                                                 <li
-                                                    key={responsibilityKey}
+                                                    key={r.key}
                                                     className="flex gap-4"
                                                 >
                                                     <Input
                                                         placeholder={++index}
+                                                        value={r.description}
                                                         onChange={(e) =>
-                                                            experiences.handleResponsibilitiesOnChange(
-                                                                e,
-                                                                'description',
-                                                                responsibilityKey,
+                                                            experienceHandlers.onResponsibilityChange(
+                                                                e.target.value,
+                                                                expItem.key,
+                                                                r.key,
                                                             )
                                                         }
                                                     />
@@ -136,9 +136,9 @@ const Form = () => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                experiences.handleRemoveResponsibilityClick(
+                                                                experienceHandlers.removeResponsibility(
                                                                     expItem.key,
-                                                                    responsibilityKey,
+                                                                    r.key,
                                                                 )
                                                             }
                                                         />
@@ -154,9 +154,7 @@ const Form = () => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    experiences.handleRemoveExperienceClick(
-                                        expItem.key,
-                                    )
+                                    experienceHandlers.remove(expItem.key)
                                 }
                             />
                         </div>
@@ -165,7 +163,7 @@ const Form = () => {
 
                 <Button
                     text="Add Experience"
-                    handleClick={experiences.handleAddExperienceClick}
+                    handleClick={experienceHandlers.add}
                 />
             </FormSection>
 
@@ -333,9 +331,7 @@ const Form = () => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    educationHandlers.remove(
-                                        educationItem.key,
-                                    )
+                                    educationHandlers.remove(educationItem.key)
                                 }
                             />
                         </div>
