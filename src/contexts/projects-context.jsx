@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useReducer, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -98,8 +99,19 @@ function reducer(projects, action) {
 }
 
 export function ProjectsContextProvider({ children }) {
-    // TODO: Save state in localStorage
-    const [projects, dispatch] = useReducer(reducer, []);
+    const _stateVersion = 'v1';
+    const localStateKey = `projectsData${_stateVersion}`;
+
+    const init = () => {
+        const savedData = localStorage.getItem(localStateKey);
+        return savedData ? JSON.parse(savedData) : [];
+    };
+
+    const [projects, dispatch] = useReducer(reducer, [], init);
+
+    useEffect(() => {
+        localStorage.setItem(localStateKey, JSON.stringify(projects));
+    }, [projects]);
 
     return (
         <ProjectsContext.Provider
