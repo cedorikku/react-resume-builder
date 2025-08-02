@@ -1,7 +1,7 @@
 import './styles/Form.css';
 import { useContext } from 'react';
 import Input from './components/Input';
-import Button, { ButtonRed } from './components/Button';
+import Button from './components/Button';
 import { FormSection } from './components/layouts/FormSection';
 import { ProfileContext } from './contexts/profile-context';
 import { EducationContext } from './contexts/education-context';
@@ -133,8 +133,9 @@ const Form = () => {
                                                         }
                                                     />
                                                     <div className="flex basis-20">
-                                                        <ButtonRed
+                                                        <Button
                                                             text="-"
+                                                            color="red"
                                                             handleClick={() =>
                                                                 experienceHandlers.removeResponsibility(
                                                                     expItem.key,
@@ -151,8 +152,9 @@ const Form = () => {
                             ) : (
                                 ''
                             )}
-                            <ButtonRed
+                            <Button
                                 text="Remove"
+                                color="red"
                                 handleClick={() =>
                                     experienceHandlers.remove(expItem.key)
                                 }
@@ -229,8 +231,9 @@ const Form = () => {
                                                         }
                                                     />
                                                     <div className="flex basis-20">
-                                                        <ButtonRed
+                                                        <Button
                                                             text="-"
+                                                            color="red"
                                                             handleClick={() =>
                                                                 projectHandlers.removeDescription(
                                                                     projectItem.key,
@@ -248,8 +251,9 @@ const Form = () => {
                                 ''
                             )}
 
-                            <ButtonRed
+                            <Button
                                 text="Remove"
+                                color="red"
                                 handleClick={() =>
                                     projectHandlers.remove(projectItem.key)
                                 }
@@ -324,8 +328,9 @@ const Form = () => {
                                 />
                             </div>
 
-                            <ButtonRed
+                            <Button
                                 text="Remove"
+                                color="red"
                                 handleClick={() =>
                                     educationHandlers.remove(educationItem.key)
                                 }
@@ -367,8 +372,9 @@ const Form = () => {
                                 }
                             />
                         </div>
-                        <ButtonRed
+                        <Button
                             text="Remove"
+                            color="red"
                             handleClick={() =>
                                 skillsHandler.remove(skillItem.key)
                             }

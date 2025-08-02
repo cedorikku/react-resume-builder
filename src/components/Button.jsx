@@ -1,21 +1,21 @@
-export const Button = ({ type = 'button', text, handleClick }) => (
-    <button
-        type={type}
-        onClick={handleClick}
-        className="w-[100%] cursor-pointer rounded-sm bg-white px-8 py-4 font-bold text-black transition-colors hover:bg-white/80 active:scale-95"
-    >
-        {text}
-    </button>
-);
+export const Button = ({
+    type = 'button',
+    text,
+    color = 'white',
+    handleClick,
+}) => {
+    const bgColor = color !== 'white' ? `bg-${color}-500` : `bg-${color}`;
+    const textColor = color !== 'white' ? 'text-white' : 'text-black';
+    const hoverColor =
+        color !== 'white' ? `hover:bg-${color}-600` : 'hover:bg-white/80';
 
-export const ButtonRed = ({ type = 'button', text, handleClick }) => (
-    <button
-        type={type}
-        onClick={handleClick}
-        className="w-[100%] cursor-pointer rounded-sm bg-red-500 px-8 py-4 font-bold text-white transition-colors hover:bg-red-600 active:scale-95"
-    >
-        {text}
-    </button>
-);
+    const classes = `w-full cursor-pointer ${textColor} rounded-sm ${bgColor} px-8 py-4 font-bold transition-colors ${hoverColor} active:scale-95`;
+
+    return (
+        <button type={type} onClick={handleClick} className={classes}>
+            {text}
+        </button>
+    );
+};
 
 export default Button;
