@@ -1,4 +1,4 @@
-import { useReducer, createContext } from 'react';
+import { useReducer, createContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const ExperiencesContext = createContext([]);
@@ -100,9 +100,18 @@ function reducer(experiences, action) {
 }
 
 export function ExperiencesContextProvider({ children }) {
-    // TODO: Implement initial state to be from localStorage
+    const _stateVersion = 'v1';
+    const localStateKey = `experiencesData-${_stateVersion}`;
+    const init = () => {
+        const savedData = localStorage.getItem(localStateKey);
+        return savedData ? JSON.parse(savedData) : [];
+    }
 
-    const [experiences, dispatch] = useReducer(reducer, []);
+    const [experiences, dispatch] = useReducer(reducer, [], init);
+
+    useEffect(() => {
+        localStorage.setItem(localStateKey, JSON.stringify(experiences));
+    }, [experiences]);
 
     return (
         <ExperiencesContext.Provider
