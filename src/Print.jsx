@@ -10,7 +10,7 @@ import { SkillsContext } from './contexts/skills-context';
 const Print = () => {
     const { profile } = useContext(ProfileContext);
     const { experiences } = useContext(ExperiencesContext);
-    const projects = useContext(ProjectsContext);
+    const { projects } = useContext(ProjectsContext);
     const { education } = useContext(EducationContext);
     const skills = useContext(SkillsContext);
 
@@ -69,9 +69,9 @@ const Print = () => {
                 ''
             )}
 
-            {projects.items.length != 0 ? (
+            {projects.length != 0 ? (
                 <PrintSection name="Projects">
-                    {projects.items.map((projectItem) => {
+                    {projects.map((projectItem) => {
                         return (
                             <div key={projectItem.key}>
                                 <div className="flex justify-between">
@@ -83,21 +83,15 @@ const Print = () => {
                                     </span>
                                 </div>
                                 <ul>
-                                    {projects.responsibilities.length != 0
-                                        ? projectItem.responsibilities.map(
-                                            (key) => {
-                                                const responsibility =
-                                                    projects.responsibilities.find(
-                                                        (r) => r.key === key,
-                                                    );
-                                                return (
-                                                    <li key={key}>
-                                                        {responsibility.description ||
-                                                            '[A Description]'}
-                                                    </li>
-                                                );
-                                            },
-                                        )
+                                    {projectItem.descriptions.length != 0
+                                        ? projectItem.descriptions.map((d) => {
+                                            return (
+                                                <li key={d.key}>
+                                                    {d.description ||
+                                                        '[A Description of the project.]'}
+                                                </li>
+                                            );
+                                        })
                                         : ''}
                                 </ul>
                             </div>

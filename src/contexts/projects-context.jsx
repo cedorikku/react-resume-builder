@@ -1,127 +1,162 @@
-import { useState, createContext } from 'react';
+import { useReducer, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const ProjectsContext = createContext([]);
 
-export function ProjectsContextProvider({ children }) {
-    const [projects, setProjects] = useState([]);
-    const [descriptions, setDescriptions] = useState([]);
+const ACTIONS = {
+    ADD_PROJECT: 'add_project',
+    UPDATE_PROJECT: 'update_project',
+    REMOVE_PROJECT: 'remove_project',
+    ADD_DESCRIPTION: 'add_description',
+    UPDATE_DESCRIPTION: 'update_description',
+    REMOVE_DESCRIPTION: 'remove_description',
+};
 
-    const handleProjectsOnChange = (e, name, itemKey) => {
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === itemKey) {
+function reducer(projects, action) {
+    switch (action.type) {
+        case ACTIONS.ADD_PROJECT: {
+            return [
+                ...projects,
+                {
+                    key: uuidv4(),
+                    name: '',
+                    period: '',
+                    descriptions: [],
+                },
+            ];
+        }
+        case ACTIONS.UPDATE_PROJECT: {
+            return projects.map((proj) => {
+                if (proj.key === action.payload.projKey) {
                     return {
                         ...proj,
-                        [name]: e.target.value,
+                        [action.payload.propName]: action.payload.newValue,
                     };
                 }
 
                 return proj;
-            }),
-        );
-    };
+            });
+        }
+        case ACTIONS.REMOVE_PROJECT: {
+            return projects.filter(
+                (projItem) => projItem.key !== action.payload.projKey,
+            );
+        }
+        case ACTIONS.ADD_DESCRIPTION: {
+            const newDescriptionKey = uuidv4();
 
-    const handleAddProjectClick = () => {
-        // The key for the first responsibility of this project
-        const firstResponsibilityKey = uuidv4();
-
-        setProjects([
-            ...projects,
-            {
-                key: uuidv4(),
-                name: '',
-                period: '',
-                responsibilities: [firstResponsibilityKey],
-            },
-        ]);
-
-        // Add in a first one automatically
-        setDescriptions([
-            ...descriptions,
-            {
-                key: firstResponsibilityKey,
-                description: '',
-            },
-        ]);
-    };
-
-    const handleRemoveProjectClick = (key) => {
-        setProjects(projects.filter((projItem) => projItem.key !== key));
-    };
-
-    const handleAddDescriptionClick = (itemKey) => {
-        const newResponsibilityKey = uuidv4();
-
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === itemKey) {
+            return projects.map((proj) => {
+                if (proj.key === action.payload.projKey) {
                     return {
                         ...proj,
-                        responsibilities: [
-                            ...proj.responsibilities,
-                            newResponsibilityKey,
+                        descriptions: [
+                            ...proj.descriptions,
+                            {
+                                key: newDescriptionKey,
+                                description: '',
+                            },
                         ],
                     };
                 }
+
                 return proj;
-            }),
-        );
-
-        setDescriptions([
-            ...descriptions,
-            {
-                key: newResponsibilityKey,
-                description: '',
-            },
-        ]);
-    };
-
-    const handleDescriptionsOnChange = (e, name, itemKey) => {
-        setDescriptions(
-            descriptions.map((pr) => {
-                if (pr.key === itemKey) {
-                    return {
-                        ...pr,
-                        [name]: e.target.value,
-                    };
-                }
-
-                return pr;
-            }),
-        );
-    };
-
-    const handleRemoveDescriptionClick = (projectKey, itemKey) => {
-        setProjects(
-            projects.map((proj) => {
-                if (proj.key === projectKey) {
+            });
+        }
+        case ACTIONS.UPDATE_DESCRIPTION: {
+            return projects.map((proj) => {
+                if (proj.key === action.payload.projKey) {
                     return {
                         ...proj,
-                        responsibilities: proj.responsibilities.filter(
-                            (item) => item !== itemKey,
+                        descriptions: proj.descriptions.map((p) =>
+                            p.key === action.payload.dKey
+                                ? { ...p, description: action.payload.newValue }
+                                : p,
                         ),
                     };
                 }
 
                 return proj;
-            }),
-        );
+            });
+        }
+        case ACTIONS.REMOVE_DESCRIPTION: {
+            return projects.map((proj) => {
+                if (proj.key === action.payload.projKey) {
+                    return {
+                        ...proj,
+                        descriptions: proj.descriptions.filter(
+                            (p) => p.key !== action.payload.dKey,
+                        ),
+                    };
+                }
 
-        setDescriptions(descriptions.filter((item) => item.key !== itemKey));
-    };
+                return proj;
+            });
+        }
+        default:
+            throw new Error('Unimplemented action: ', action.type);
+    }
+}
+
+export function ProjectsContextProvider({ children }) {
+    // TODO: Save state in localStorage
+    const [projects, dispatch] = useReducer(reducer, []);
 
     return (
         <ProjectsContext.Provider
             value={{
-                items: projects,
-                responsibilities: descriptions,
-                handleProjectsOnChange,
-                handleAddProjectClick,
-                handleRemoveProjectClick,
-                handleAddDescriptionClick,
-                handleDescriptionsOnChange,
-                handleRemoveDescriptionClick,
+                projects,
+                projectHandlers: {
+                    add: () => {
+                        dispatch({
+                            type: ACTIONS.ADD_PROJECT,
+                        });
+                    },
+                    onChange: (newValue, propName, projKey) => {
+                        dispatch({
+                            type: ACTIONS.UPDATE_PROJECT,
+                            payload: {
+                                newValue,
+                                propName,
+                                projKey,
+                            },
+                        });
+                    },
+                    remove: (projKey) => {
+                        dispatch({
+                            type: ACTIONS.REMOVE_PROJECT,
+                            payload: {
+                                projKey: projKey,
+                            },
+                        });
+                    },
+                    addDescription: (projKey) => {
+                        dispatch({
+                            type: ACTIONS.ADD_DESCRIPTION,
+                            payload: {
+                                projKey,
+                            },
+                        });
+                    },
+                    onDescriptionChange: (newValue, projKey, dKey) => {
+                        dispatch({
+                            type: ACTIONS.UPDATE_DESCRIPTION,
+                            payload: {
+                                newValue,
+                                projKey,
+                                dKey,
+                            },
+                        });
+                    },
+                    removeDescription: (projKey, dKey) => {
+                        dispatch({
+                            type: ACTIONS.REMOVE_DESCRIPTION,
+                            payload: {
+                                projKey,
+                                dKey,
+                            },
+                        });
+                    },
+                },
             }}
         >
             {children}

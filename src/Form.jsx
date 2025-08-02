@@ -12,7 +12,7 @@ import { SkillsContext } from './contexts/skills-context';
 const Form = () => {
     const { profile, handleProfileOnChange } = useContext(ProfileContext);
     const { experiences, experienceHandlers } = useContext(ExperiencesContext);
-    const projects = useContext(ProjectsContext);
+    const { projects, projectHandlers } = useContext(ProjectsContext);
     const { education, educationHandlers } = useContext(EducationContext);
     const skills = useContext(SkillsContext);
 
@@ -168,15 +168,15 @@ const Form = () => {
             </FormSection>
 
             <FormSection name="Projects">
-                {projects.items.map((projectItem) => {
+                {projects.map((projectItem) => {
                     return (
                         <div key={projectItem.key} className="input-group">
                             <Input
                                 label="Name"
                                 value={projectItem.name || ''}
                                 onChange={(e) =>
-                                    projects.handleProjectsOnChange(
-                                        e,
+                                    projectHandlers.onChange(
+                                        e.target.value,
                                         'name',
                                         projectItem.key,
                                     )
@@ -187,8 +187,8 @@ const Form = () => {
                                 label="Period"
                                 value={projectItem.period || ''}
                                 onChange={(e) =>
-                                    projects.handleProjectsOnChange(
-                                        e,
+                                    projectHandlers.onChange(
+                                        e.target.value,
                                         'period',
                                         projectItem.key,
                                     )
@@ -197,33 +197,34 @@ const Form = () => {
 
                             <div className="flex items-center gap-8">
                                 <label className="text-sm font-medium">
-                                    Responsibilities
+                                    Descriptions
                                 </label>
                                 <Button
                                     text="+"
                                     handleClick={() =>
-                                        projects.handleAddDescriptionClick(
+                                        projectHandlers.addDescription(
                                             projectItem.key,
                                         )
                                     }
                                 />
                             </div>
-                            {projectItem.responsibilities.length != 0 ? (
+                            {projectItem.descriptions.length != 0 ? (
                                 <ul className="flex flex-col justify-center gap-4">
-                                    {projectItem.responsibilities.map(
-                                        (responsibilityKey, index) => {
+                                    {projectItem.descriptions.map(
+                                        (d, index) => {
                                             return (
                                                 <li
-                                                    key={responsibilityKey}
+                                                    key={d.key}
                                                     className="flex gap-4"
                                                 >
                                                     <Input
                                                         placeholder={++index}
+                                                        value={d.description}
                                                         onChange={(e) =>
-                                                            projects.handleDescriptionsOnChange(
-                                                                e,
-                                                                'description',
-                                                                responsibilityKey,
+                                                            projectHandlers.onDescriptionChange(
+                                                                e.target.value,
+                                                                projectItem.key,
+                                                                d.key,
                                                             )
                                                         }
                                                     />
@@ -231,9 +232,9 @@ const Form = () => {
                                                         <ButtonRed
                                                             text="-"
                                                             handleClick={() =>
-                                                                projects.handleRemoveDescriptionClick(
+                                                                projectHandlers.removeDescription(
                                                                     projectItem.key,
-                                                                    responsibilityKey,
+                                                                    d.key,
                                                                 )
                                                             }
                                                         />
@@ -250,19 +251,14 @@ const Form = () => {
                             <ButtonRed
                                 text="Remove"
                                 handleClick={() =>
-                                    projects.handleRemoveProjectClick(
-                                        projectItem.key,
-                                    )
+                                    projectHandlers.remove(projectItem.key)
                                 }
                             />
                         </div>
                     );
                 })}
 
-                <Button
-                    text="Add Project"
-                    handleClick={projects.handleAddProjectClick}
-                />
+                <Button text="Add Project" handleClick={projectHandlers.add} />
             </FormSection>
 
             <FormSection name="Education">
