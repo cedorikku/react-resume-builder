@@ -1,10 +1,20 @@
-import { useState, createContext } from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 export const SkillsContext = createContext([]);
 
 export function SkillsContextProvider({ children }) {
-    const [skills, setSkills] = useState([]);
+    const _stateVersion = 'v1';
+    const localStateKey = `skillsData-${_stateVersion}`;
+
+    const [skills, setSkills] = useState(() => {
+        const savedData = localStorage.getItem(localStateKey);
+        return savedData ? JSON.parse(savedData) : [];
+    });
+
+    useEffect(() => {
+        localStorage.setItem(localStateKey, JSON.stringify(skills));
+    }, [skills]);
 
     const handleSkillsOnChange = (e, name, itemKey) => {
         setSkills(
@@ -39,10 +49,12 @@ export function SkillsContextProvider({ children }) {
     return (
         <SkillsContext.Provider
             value={{
-                items: skills,
-                handleSkillsOnChange,
-                handleAddSkills,
-                handleRemoveSkills,
+                skills,
+                skillsHandler: {
+                    add: handleAddSkills,
+                    onChange: handleSkillsOnChange,
+                    remove: handleRemoveSkills,
+                },
             }}
         >
             {children}

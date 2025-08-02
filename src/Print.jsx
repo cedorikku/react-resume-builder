@@ -12,7 +12,7 @@ const Print = () => {
     const { experiences } = useContext(ExperiencesContext);
     const { projects } = useContext(ProjectsContext);
     const { education } = useContext(EducationContext);
-    const skills = useContext(SkillsContext);
+    const { skills } = useContext(SkillsContext);
 
     return (
         <div className="print sticky top-0 h-[1056px] w-[816px] flex-none bg-white px-16 py-8 font-serif text-black">
@@ -140,10 +140,10 @@ const Print = () => {
                 ''
             )}
 
-            {skills.items.length != 0 ? (
+            {skills.length != 0 ? (
                 <PrintSection name="Skills">
                     <ul>
-                        {skills.items.map((skillItem) => {
+                        {skills.map((skillItem) => {
                             return (
                                 <li key={skillItem.key} className="skill-item">
                                     {skillItem.category ? (

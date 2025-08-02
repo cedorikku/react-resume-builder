@@ -14,7 +14,7 @@ const Form = () => {
     const { experiences, experienceHandlers } = useContext(ExperiencesContext);
     const { projects, projectHandlers } = useContext(ProjectsContext);
     const { education, educationHandlers } = useContext(EducationContext);
-    const skills = useContext(SkillsContext);
+    const { skills, skillsHandler } = useContext(SkillsContext);
 
     return (
         <form className="form min-w-300 flex-none text-sm text-white">
@@ -341,14 +341,14 @@ const Form = () => {
 
             {/* skills with category bullet point section */}
             <FormSection name="Skills">
-                {skills.items.map((skillItem) => (
+                {skills.map((skillItem) => (
                     <div key={skillItem.key} className="input-group">
                         <div className="two-col short-long">
                             <Input
                                 label="Category"
                                 value={skillItem.category || ''}
                                 onChange={(e) =>
-                                    skills.handleSkillsOnChange(
+                                    skillsHandler.onChange(
                                         e,
                                         'category',
                                         skillItem.key,
@@ -359,7 +359,7 @@ const Form = () => {
                                 label="List of skills"
                                 value={skillItem.values || ''}
                                 onChange={(e) =>
-                                    skills.handleSkillsOnChange(
+                                    skillsHandler.onChange(
                                         e,
                                         'values',
                                         skillItem.key,
@@ -370,12 +370,13 @@ const Form = () => {
                         <ButtonRed
                             text="Remove"
                             handleClick={() =>
-                                skills.handleRemoveSkills(skillItem.key)
+                                skillsHandler.remove(skillItem.key)
                             }
                         />
                     </div>
                 ))}
-                <Button text="Add Skill" handleClick={skills.handleAddSkills} />
+
+                <Button text="Add Skill" handleClick={skillsHandler.add} />
             </FormSection>
         </form>
     );
