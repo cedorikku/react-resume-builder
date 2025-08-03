@@ -1,4 +1,9 @@
 /* bulleted */
+.print ul {
+    display: block;
+    padding-inline-start: 1.75rem;
+}
+
 .print li {
-    list-style: inside;
+    list-style: disc;
 }
